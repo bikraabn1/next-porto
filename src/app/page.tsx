@@ -1,9 +1,9 @@
-import SplashScreen from '@/app/components/SplashScreen'
+import Main from "./main-content/Main";
 
-export default function Home() {
-  return (
-    <div>
-      <SplashScreen  />
-    </div>
-  );
+export default function Home(){
+  return(
+    <>
+      <Main />
+    </>
+  )
 }
