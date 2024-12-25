@@ -5,18 +5,17 @@ import { useGSAP } from "@gsap/react"
 import { useRef, useState } from "react"
 
 const SplashScreen = (
-    { onAnimationComplete } : { onAnimationComplete : () => void}
+    { onAnimationComplete }: { onAnimationComplete: () => void }
 ) => {
     const splashRef = useRef<HTMLHeadingElement>(null)
     const [load, setLoad] = useState<boolean>(true)
 
     useGSAP(() => {
         const animation = gsap.timeline({
-            onComplete: () => 
-                {
-                    setLoad(false)
-                    onAnimationComplete()
-                }
+            onComplete: () => {
+                setLoad(false)
+                onAnimationComplete()
+            }
         })
 
         if (splashRef.current && load) {
@@ -39,11 +38,12 @@ const SplashScreen = (
                 .to(
                     splashRef.current,
                     {
-                        y: '-100%',
-                        scale: 0,
+                        y: '-45%',
+                        scale: 0.7,
                         duration: 1.5
                     }
                 )
+                
         }
     },
         {
