@@ -14,7 +14,7 @@ export default function Main() {
 
   return (
     <div>
-      {/* {showSplashScreen && <SplashScreen onAnimationComplete={handleAnimationComplete} />} */}
+      {showSplashScreen && <SplashScreen onAnimationComplete={handleAnimationComplete} />}
 
       {!showSplashScreen && (
         <>
