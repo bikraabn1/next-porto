@@ -1,7 +1,9 @@
 import Image from "@/app/main-content/components/Image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowDownLong } from "@fortawesome/free-solid-svg-icons"
-
+import gsap from 'gsap'
+import { useRef } from 'react'
+import { useGSAP } from '@gsap/react'
 
 
 const images = [
