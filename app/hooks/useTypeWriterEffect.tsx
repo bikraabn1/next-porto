@@ -35,7 +35,4 @@ export const useTypeWriterEffect = (words: string[], ref: RefObject<HTMLElement 
         return () => clearTimeout(timeout)
 
     }, [words, ref])
-
-    console.log('ref :', ref);
-    console.log('words :', words)
 }
