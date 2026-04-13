@@ -38,14 +38,8 @@ const LandingPage = () => {
     return (
         <main ref={mainRef} className='h-screen w-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth'>
             <section ref={pageContainer} className='page-section relative flex w-full flex-col snap-start items-center justify-center min-h-screen bg-background text-foreground overflow-hidden'>
-
-                {/* Background Grid */}
                 <div className="absolute inset-0 h-full w-full bg-[#0a0a0a] bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-size-[200px_100px] mask-[radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)]"></div>
-
-                {/* Glowing Orb (Terpisah dari teks, di-set ke belakang dengan -z-10) */}
                 <div className='absolute bg-orange-600/20 w-160 h-160 rounded-full blur-[120px] pointer-events-none'></div>
-
-                {/* Teks Utama (Berada di depan orb) */}
                 <div className='relative flex flex-col items-center justify-center'>
                     <h1 className='text-[clamp(4rem,20vw,20rem)] tracking-tighter leading-[0.75] font-clash-display'>
                         BIKRA
@@ -58,23 +52,19 @@ const LandingPage = () => {
             </section>
 
             <div className='page-section flex w-full flex-col snap-start items-center justify-center min-h-screen bg-foreground text-background'>
-                <h1 className='text-5xl font-bold mb-4'>Tech Stack Part</h1>
-            </div>
-
-            <div className='page-section flex w-full flex-col snap-start items-center justify-center min-h-screen bg-foreground text-background'>
                 <h1 className='text-5xl font-bold mb-4'>Projects Part</h1>
             </div>
 
             <div className='page-section flex w-full flex-col snap-start items-center justify-center min-h-screen bg-foreground text-background'>
-                <h1 className='text-5xl font-bold mb-4'>Call Center Part</h1>
+                <h1 className='text-5xl font-bold mb-4'>Tech Stack Part</h1>
             </div>
 
             <div className='page-section flex w-full flex-col snap-start items-center justify-center min-h-screen bg-foreground text-background'>
                 <h1 className='text-5xl font-bold mb-4'>Jackson Bot Part</h1>
             </div>
 
-            <div className='flex w-full flex-col snap-start items-center justify-center min-h-screen bg-foreground text-background'>
-                <h1 className='text-5xl font-bold mb-4'>My Bini List</h1>
+            <div className='page-section flex w-full flex-col snap-start items-center justify-center min-h-screen bg-foreground text-background'>
+                <h1 className='text-5xl font-bold mb-4'>About Me Part</h1>
             </div>
         </main>
     )

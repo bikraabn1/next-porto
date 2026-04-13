@@ -1,5 +1,5 @@
 const Navbar = () => {
-    const menus = ['Home', 'Projects', 'Jackson', 'Tech Stack', 'Contact Me']
+    const menus = ['Home', 'Projects', 'Tech Stack', 'Jackson', 'About Me']
     return (
         <nav className="absolute top-10 rounded-full left-1/2 -translate-x-1/2 flex gap-3 p-2 bg-[#171717]/60 backdrop-blur-md z-50">
             {menus.map((text, index) => (
