@@ -1,15 +1,10 @@
 'use client'
-import { useTypeWriterEffect } from '@/app/hooks/useTypeWriterEffect'
-import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useRef } from 'react'
 
 const LandingPage = () => {
-    const words = ["FRONTEND DEVELOPER", "WEB ENTHUSIAST", "ML ENTHUSIAST"]
-    const textRef = useRef<HTMLElement | null>(null)
-
-    // useTypeWriterEffect(words, textRef)
 
     gsap.registerPlugin(useGSAP)
     gsap.registerPlugin(ScrollTrigger)
