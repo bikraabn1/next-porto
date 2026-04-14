@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Fira_Code, Geist, Geist_Mono, Playwrite_NZ_Guides } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "./components/navbar/Navbar";
+import Navbar from "./components/ui/navigation/Navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

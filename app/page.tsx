@@ -1,9 +1,8 @@
-import Image from "next/image";
-import LandingPage from "./components/landing-page/LandingPage";
+import LandingPage from "./components/layout/landing-page/LandingPage";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen bg-background font-sans">
+    <div className="flex bg-background font-sans">
       <LandingPage />
     </div>
   );
