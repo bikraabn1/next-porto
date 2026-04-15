@@ -2,7 +2,8 @@
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
+import Preloader from '../../ui/preloader/Preloader'
 
 const LandingPage = () => {
     gsap.registerPlugin(useGSAP)
@@ -10,8 +11,23 @@ const LandingPage = () => {
 
     const pageContainer = useRef<HTMLElement | null>(null)
     const mainRef = useRef<HTMLElement | null>(null)
+    const headingNameRef = useRef<HTMLDivElement | null>(null)
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
     useGSAP(() => {
+        if (isLoading || !headingNameRef.current) return;
+        const names = gsap.utils.toArray(headingNameRef.current.children) as HTMLElement[];
+
+        gsap.fromTo(names[0],
+            { x: -200, autoAlpha: 0 },
+            { x: 0, autoAlpha: 1, duration: 2, ease: "power2.out" }
+        );
+
+        gsap.fromTo(names[1],
+            { x: 200, autoAlpha: 0 },
+            { x: 0, autoAlpha: 1, duration: 2, ease: "power2.out", delay: 0.2 }
+        );
+
         gsap.to(pageContainer.current, {
             borderBottomLeftRadius: '20px',
             borderBottomRightRadius: '20px',
@@ -25,18 +41,19 @@ const LandingPage = () => {
             }
         })
 
-    }, { scope: pageContainer })
+    }, { scope: pageContainer, dependencies: [isLoading] })
 
     return (
         <main id='main-scroller' ref={mainRef} className='h-screen w-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth'>
+            {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
             <section ref={pageContainer} className='page-section relative flex w-full flex-col snap-start items-center justify-center min-h-screen bg-background text-foreground overflow-hidden'>
                 <div className="absolute inset-0 h-full w-full bg-overlay bg-[linear-gradient(to_right,var(--color-grid-line)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-grid-line)_1px,transparent_1px)] bg-size-[200px_100px] mask-[radial-gradient(ellipse_60%_60%_at_50%_50%,var(--color-mask-solid)_70%,transparent_100%)]"></div>
                 <div className='absolute bg-orange-600/20 w-160 h-160 rounded-full blur-[120px] pointer-events-none'></div>
-                <div className='relative flex flex-col items-center justify-center'>
-                    <h1 className='text-[clamp(4rem,20vw,20rem)] tracking-tighter leading-[0.75] font-clash-display'>
+                <div ref={headingNameRef} className='relative flex flex-col items-center justify-center'>
+                    <h1 className='text-[clamp(4rem,20vw,20rem)] invisible tracking-tighter leading-[0.75] font-clash-display'>
                         BIKRA
                     </h1>
-                    <h1 className='text-[clamp(4rem,20vw,20rem)] tracking-tighter leading-[0.75] font-clash-display'>
+                    <h1 className='text-[clamp(4rem,20vw,20rem)] invisible tracking-tighter leading-[0.75] font-clash-display'>
                         ABNA
                     </h1>
                 </div>

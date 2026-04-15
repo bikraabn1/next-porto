@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fira_Code, Geist, Geist_Mono, Playwrite_NZ_Guides } from "next/font/google";
+import { Fira_Code, Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "./components/ui/navigation/Navigation";
@@ -12,11 +12,6 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-});
-
-const playWriteNewZealandBasicGuides = Playwrite_NZ_Guides({
-  variable: "--font-playwrite-nz-guides",
-  weight: ["400"],
 });
 
 const firaCode = Fira_Code({
@@ -42,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${clashDisplay.variable} ${firaCode.variable} ${geistMono.variable} ${playWriteNewZealandBasicGuides.variable} antialiased`}
+        className={`${geistSans.variable} ${clashDisplay.variable} ${firaCode.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
         {children}

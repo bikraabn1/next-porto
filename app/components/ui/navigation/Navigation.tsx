@@ -23,13 +23,11 @@ const Navigation = () => {
             scroller: '#main-scroller',
 
             onEnter: () => {
-                console.log('masuk wo')
                 gsap.to(topNavRef.current, { y: -100, autoAlpha: 0, duration: 0.3 })
                 gsap.to(sideNavRef.current, { x: 0, autoAlpha: 1, duration: 0.4, ease: "back.out(1.5)" })
             },
 
             onLeaveBack: () => {
-                console.log('metu wo')
                 gsap.to(sideNavRef.current, { x: 50, autoAlpha: 0, duration: 0.3 })
                 gsap.to(topNavRef.current, { y: 0, autoAlpha: 1, duration: 0.4, ease: "power2.out" })
                 setIsSideNavOpen(false)
@@ -54,7 +52,7 @@ const Navigation = () => {
                             ))}
                         </nav>
                         :
-                        <button className="absolute top-10 right-10 z-20 cursor-pointer bg-primary rounded-full p-4 pointer-events-auto shadow-[0_0_15px_rgba(234,88,12,0.4)] hover:scale-110 transition-transform" onClick={() => setIsSideNavOpen(true)}>
+                        <button className="absolute top-10 right-10 z-20 cursor-pointer bg-primary rounded-full p-4 pointer-events-auto hover:scale-110 transition-transform" onClick={() => setIsSideNavOpen(true)}>
                             <CgMenu size={24} className="text-foreground" />
                         </button>
                 }
