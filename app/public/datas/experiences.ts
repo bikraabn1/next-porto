@@ -21,7 +21,19 @@ export const EXPERIENCE_DATAS = [
             'Adapted quickly to different UI libraries and design systems based on project needs.',
             'Ensured consistent layout and usability across mobile and desktop devices.',
         ],
-        stack: ['React', 'Next.js', 'Docker', 'PM2'],
+        stack: ['React.js', 'Next.js', 'Docker', 'PM2'],
+    },
+    {
+        period: 'April 2025',
+        role: 'Frontend Mentor',
+        company: 'JKB Learning Center by HIMATRIS',
+        highlights: [
+            'Guided university peers in learning fundamental web development concepts, including HTML, CSS, and basic JavaScript.',
+            'Introduced the basics of React and component-based UI development through hands-on practice.',
+            'Assisted students in troubleshooting and debugging code to build basic problem-solving skills.',
+            'Facilitated interactive learning sessions to help beginners build simple and responsive web pages.'
+        ],
+        stack: ['React.js', 'HTML', 'CSS', 'JavaScript'],
     },
     {
         period: '2024 — 2025',
