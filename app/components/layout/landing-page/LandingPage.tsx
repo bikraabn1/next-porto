@@ -117,6 +117,18 @@ const LandingPage = () => {
             }
         })
 
+        gsap.fromTo(
+            '.projects-marquee-track',
+            { x: 0 },
+            {
+                x: '-50%',
+                duration: 20,
+                ease: 'none',
+                repeat: -1,
+                force3D: true
+            }
+        )
+
         sections.slice(1).forEach((section) => {
             const sectionElements = gsap.utils.toArray(
                 'h2, h3, article',
@@ -162,7 +174,19 @@ const LandingPage = () => {
                 </div>
             </section>
 
-            <section className='page-section relative flex w-full flex-col snap-start items-center justify-center min-h-screen bg-foreground text-background overflow-hidden'>
+            <section className='page-section relative flex w-full flex-col snap-start items-center justify-center min-h-screen bg-linear-to-b from-background via-foreground to-foreground text-background overflow-hidden'>
+                <div className='relative w-full overflow-hidden border-y border-white/10 py-3 bg-background/50 backdrop-blur-sm'>
+                    <div className='pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-linear-to-r from-background/95 to-transparent'></div>
+                    <div className='pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-linear-to-l from-background/95 to-transparent'></div>
+                    <div className='projects-marquee-track flex min-w-max items-center gap-8 will-change-transform'>
+                        <p className='text-primary font-fira-code tracking-widest text-sm uppercase whitespace-nowrap'>
+                            FRONTEND ENGINEER • WEB3 • AI • FRONTEND ENGINEER • WEB3 • AI • FRONTEND ENGINEER • WEB3 • AI • FRONTEND ENGINEER • WEB3 • AI •
+                        </p>
+                        <p aria-hidden='true' className='text-primary font-fira-code tracking-widest text-sm uppercase whitespace-nowrap'>
+                            FRONTEND ENGINEER • WEB3 • AI • FRONTEND ENGINEER • WEB3 • AI • FRONTEND ENGINEER • WEB3 • AI • FRONTEND ENGINEER • WEB3 • AI •
+                        </p>
+                    </div>
+                </div>
                 <div className='w-full max-w-7xl px-6 py-16 md:px-10'>
                     <div className='mb-10 flex items-end justify-between gap-4'>
                         <div>
@@ -172,10 +196,14 @@ const LandingPage = () => {
                     </div>
 
                     <div className='grid gap-6 md:grid-cols-2 xl:grid-cols-3'>
-                        {projects.map((project) => (
+                        {projects.map((project, index) => (
                             <article key={project.title} className='rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md transition-transform duration-300 hover:-translate-y-1'>
                                 <div className='mb-4 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-sm text-background/70'>
-                                    {project.imagePlaceholder}
+                                    <img
+                                        src={`https://picsum.photos/seed/${index + 1}/600/400`}
+                                        alt={project.title}
+                                        className='w-full h-full object-cover rounded-xl opacity-80 hover:opacity-100 transition-opacity duration-300'
+                                    />
                                 </div>
                                 <h3 className='mb-2 text-xl font-semibold'>{project.title}</h3>
                                 <p className='mb-4 text-sm leading-relaxed text-background/80'>{project.description}</p>
@@ -197,6 +225,12 @@ const LandingPage = () => {
                                 }
                             </article>
                         ))}
+                    </div>
+
+                    <div className='flex justify-center mt-12'>
+                        <Link href='/projects' className='rounded-full border border-primary/40 bg-primary/10 px-8 py-3 text-sm text-primary transition-all duration-300 hover:bg-primary/20 hover:-translate-y-1'>
+                            See More Projects
+                        </Link>
                     </div>
                 </div>
             </section>
