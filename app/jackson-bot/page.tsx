@@ -11,8 +11,8 @@ const messages = [
 
 export default function JacksonBotPage() {
     return (
-        <main className='min-h-screen bg-foreground text-background'>
-            <section className='mx-auto w-full max-w-5xl px-6 py-20 md:px-10'>
+          <main id='main-scroller' className='h-screen overflow-y-auto bg-foreground text-background'>
+            <section className='relative mx-auto w-full max-w-6xl px-6 pb-20 pt-40 md:px-10'>
                 <div className='mb-8 flex flex-wrap items-end justify-between gap-4'>
                     <div>
                         <p className='mb-2 text-sm uppercase tracking-[0.2em] text-primary font-fira-code'>AI Interface</p>

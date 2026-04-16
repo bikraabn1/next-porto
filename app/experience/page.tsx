@@ -38,10 +38,8 @@ const experiences = [
 
 export default function ExperiencePage() {
     return (
-        <main className='min-h-screen bg-foreground text-background'>
-            <section className='relative mx-auto w-full max-w-6xl px-6 py-24 md:px-10'>
-                <div className='pointer-events-none absolute right-10 top-10 h-56 w-56 rounded-full bg-primary/20 blur-3xl'></div>
-
+        <main id='main-scroller' className='h-screen overflow-y-auto bg-foreground text-background'>
+            <section className='relative mx-auto w-full max-w-6xl px-6 pb-20 pt-40 md:px-10'>
                 <div className='relative mb-10 flex flex-wrap items-end justify-between gap-4'>
                     <div>
                         <p className='mb-2 text-sm uppercase tracking-[0.2em] text-primary font-fira-code'>Career Path</p>

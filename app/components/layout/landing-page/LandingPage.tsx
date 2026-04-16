@@ -4,11 +4,11 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import type { IconType } from 'react-icons'
 import { FaArrowUpRightFromSquare, FaGithub, FaRobot } from 'react-icons/fa6'
-import { PiNetworkThin } from 'react-icons/pi'
-import { SiExpress, SiFastapi, SiGraphql, SiNextdotjs, SiNodedotjs, SiPostgresql, SiPython, SiReact, SiSocketdotio, SiTailwindcss, SiTypescript } from 'react-icons/si'
 import Preloader from '../../ui/preloader/Preloader'
+import { PROJECT_DATAS } from '@/app/public/datas/projects'
+import { TECH_STACK_DATAS } from '@/app/public/datas/tech-stack'
+import { CERTIFICATION_DATAS } from '@/app/public/datas/certification'
 
 const LandingPage = () => {
     gsap.registerPlugin(useGSAP)
@@ -19,6 +19,10 @@ const LandingPage = () => {
     const headingNameRef = useRef<HTMLDivElement | null>(null)
     const [isLoading, setIsLoading] = useState<boolean>(true)
 
+    const projects = PROJECT_DATAS
+    const techStacks = TECH_STACK_DATAS
+    const certification = CERTIFICATION_DATAS
+
     useEffect(() => {
         const hasLoaded = sessionStorage.getItem('preloaderDone')
         if (hasLoaded) setIsLoading(false)
@@ -28,66 +32,6 @@ const LandingPage = () => {
         setIsLoading(false)
         sessionStorage.setItem('preloaderDone', 'true')
     }
-
-    const projects: {
-        title: string
-        description: string
-        imagePlaceholder: string
-        techStack: string[]
-        githubLink?: string
-        webLink?: string
-        isInternal: boolean
-    }[] = [
-            {
-                title: 'Bikra`s Web Portfolio',
-                description: 'A modern portfolio featuring Web3 visual aesthetics, glassmorphism UI, and smooth GSAP scroll animations to showcase my frontend engineering journey.',
-                imagePlaceholder: 'Web Portofolio',
-                techStack: ['Next.js', 'TypeScript', 'Tailwind', 'GSAP'],
-                githubLink: '#',
-                webLink: '#',
-                isInternal: false
-            },
-            {
-                title: 'Hisho AI',
-                description: 'A Japanese AI secretary web app. Developed and refactored real-time chat streaming features and handled complex calendar rendering logic for optimal performance.',
-                imagePlaceholder: 'Secretary AI Preview',
-                techStack: ['React.js', 'TypeScript', 'Vite', 'GraphQL'],
-                githubLink: '#',
-                isInternal: true
-            },
-            {
-                title: 'Lentera - AI Agent PLN',
-                description: 'Intelligent AI assistants for PLN`s HR and HC departments. Engineered real-time chatbot interactions utilizing Socket.io and managed application state with Zustand.',
-                imagePlaceholder: 'Lentera Preview',
-                techStack: ['Next.js', 'AntDesign', 'RestAPI', 'Socket.io', 'Zustand'],
-                githubLink: '#',
-                isInternal: true
-            }
-        ]
-
-    const techStacks: { name: string, icon: IconType }[] = [
-        { name: 'React', icon: SiReact },
-        { name: 'Next.js', icon: SiNextdotjs },
-        { name: 'TypeScript', icon: SiTypescript },
-        { name: 'Tailwind CSS', icon: SiTailwindcss },
-        { name: 'Node.js', icon: SiNodedotjs },
-        { name: 'Express', icon: SiExpress },
-        { name: 'SocketIO', icon: SiSocketdotio },
-        { name: 'PostgreSQL', icon: SiPostgresql },
-        { name: 'Python', icon: SiPython },
-        { name: 'FastAPI', icon: SiFastapi },
-        { name: 'RestAPI', icon: PiNetworkThin },
-        { name: 'GraphQL', icon: SiGraphql },
-    ]
-
-    const certification: { name: string, url: string }[] = [
-        { name: 'Belajar Machine Learning untuk Pemula', url: 'https://www.dicoding.com/certificates/81P2OVYVYZOY' },
-        { name: 'Belajar Dasar Pemrograman JavaScript', url: 'https://www.dicoding.com/certificates/MRZMNDVRNPYQ' },
-        { name: 'Belajar Membuat Aplikasi Web dengan React', url: 'https://www.dicoding.com/certificates/07Z60N9OMZQR' },
-        { name: 'Belajar Dasar Pemrograman Web', url: 'https://www.dicoding.com/certificates/N9ZOO2Q16ZG5' },
-        { name: 'Belajar Membuat Front-End Web untuk Pemula', url: 'https://www.dicoding.com/certificates/0LZ02WN0KX65' },
-
-    ]
 
     useGSAP(() => {
         if (isLoading || !headingNameRef.current) return;
