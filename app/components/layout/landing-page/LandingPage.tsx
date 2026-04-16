@@ -3,10 +3,12 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useRef, useState } from 'react'
+import Link from 'next/link'
 import type { IconType } from 'react-icons'
 import { FaArrowUpRightFromSquare, FaGithub, FaRobot } from 'react-icons/fa6'
-import { SiExpress, SiMongodb, SiNextdotjs, SiNodedotjs, SiPostgresql, SiReact, SiTailwindcss, SiTypescript } from 'react-icons/si'
+import { SiExpress, SiFastapi, SiGraphql, SiMongodb, SiMysql, SiNextdotjs, SiNodedotjs, SiPostgresql, SiPython, SiReact, SiSocketdotio, SiTailwindcss, SiTypescript } from 'react-icons/si'
 import Preloader from '../../ui/preloader/Preloader'
+import { FiServer } from 'react-icons/fi'
 
 const LandingPage = () => {
     gsap.registerPlugin(useGSAP)
@@ -22,27 +24,29 @@ const LandingPage = () => {
         description: string
         imagePlaceholder: string
         techStack: string[]
-        githubLink: string
+        githubLink?: string
+        webLink?: string
     }[] = [
             {
-                title: 'Web3 Wallet Dashboard',
-                description: 'A portfolio dashboard for tracking wallet balances, NFT floor prices, and transaction activity in one clean interface.',
-                imagePlaceholder: 'Wallet Dashboard Preview',
+                title: 'Bikra`s Web Portfolio',
+                description: 'A modern, interactive portfolio website showcasing projects, skills, and experience with smooth animations and a clean, responsive UI.',
+                imagePlaceholder: 'Web Portofolio',
                 techStack: ['Next.js', 'TypeScript', 'Tailwind', 'GSAP'],
-                githubLink: '#'
+                githubLink: '#',
+                webLink: '#'
             },
             {
-                title: 'Onchain Analytics Board',
+                title: 'Hisho AI',
                 description: 'Interactive analytics cards and charts for monitoring contract events, active addresses, and gas behavior over time.',
                 imagePlaceholder: 'Analytics Board Preview',
-                techStack: ['React', 'Node.js', 'PostgreSQL', 'Charting'],
+                techStack: ['React.js', 'TypeScript', 'Vite', 'GraphQL'],
                 githubLink: '#'
             },
             {
                 title: 'NFT Mint Landing',
                 description: 'A conversion-focused mint page with animated hero transitions, whitelist status check, and responsive glassmorphism UI.',
                 imagePlaceholder: 'NFT Mint Preview',
-                techStack: ['Next.js', 'Tailwind', 'Solidity', 'Ethers'],
+                techStack: ['Next.js', 'AntDesign', 'RestAPI', 'SocketIO'],
                 githubLink: '#'
             }
         ]
@@ -54,13 +58,18 @@ const LandingPage = () => {
         { name: 'Tailwind CSS', icon: SiTailwindcss },
         { name: 'Node.js', icon: SiNodedotjs },
         { name: 'Express', icon: SiExpress },
-        { name: 'MongoDB', icon: SiMongodb },
-        { name: 'PostgreSQL', icon: SiPostgresql }
+        { name: 'SocketIO', icon: SiSocketdotio },
+        { name: 'PostgreSQL', icon: SiPostgresql },
+        { name: 'Python', icon: SiPython },
+        { name: 'FastAPI', icon: SiFastapi },
+        { name: 'RestAPI', icon: FiServer },
+        { name: 'GraphQL', icon: SiGraphql },
     ]
 
     useGSAP(() => {
         if (isLoading || !headingNameRef.current) return;
         const names = gsap.utils.toArray(headingNameRef.current.children) as HTMLElement[];
+        const sections = gsap.utils.toArray('.page-section') as HTMLElement[];
 
         gsap.fromTo(names[0],
             { x: -200, autoAlpha: 0 },
@@ -85,7 +94,34 @@ const LandingPage = () => {
             }
         })
 
-    }, { scope: pageContainer, dependencies: [isLoading] })
+        sections.slice(1).forEach((section) => {
+            const sectionElements = gsap.utils.toArray(
+                'h2, h3, article',
+                section
+            ) as HTMLElement[]
+
+            if (!sectionElements.length) return
+
+            gsap.fromTo(
+                sectionElements,
+                { y: 50, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    stagger: 0.1,
+                    ease: 'power3.out',
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: section,
+                        scroller: mainRef.current,
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            )
+        })
+
+    }, { scope: mainRef, dependencies: [isLoading] })
 
     return (
         <main id='main-scroller' ref={mainRef} className='h-screen w-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth'>
@@ -153,7 +189,7 @@ const LandingPage = () => {
                             const Icon = tech.icon
 
                             return (
-                                <div key={tech.name} className='group flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-md transition-all duration-300 hover:border-primary/40 hover:bg-white/10'>
+                                <div key={tech.name} className='group flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-md transition-all duration-300 hover:border-primary/40 hover:bg-white/10 cursor-pointer'>
                                     <Icon className='text-xl text-primary transition-transform duration-300 group-hover:scale-110' />
                                     <span className='text-sm font-medium text-background/90'>{tech.name}</span>
                                 </div>
@@ -168,7 +204,7 @@ const LandingPage = () => {
                     <p className='mb-2 text-sm tracking-[0.2em] uppercase text-primary font-fira-code'>Interactive Demo</p>
                     <h2 className='mb-8 text-4xl md:text-5xl font-clash-display tracking-tight'>Jackson Bot</h2>
 
-                    <div className='rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md overflow-hidden'>
+                    <Link href='/jackson-bot' className='block rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md overflow-hidden transition-all duration-300 hover:border-primary/40 hover:-translate-y-1'>
                         <div className='flex items-center justify-between border-b border-white/10 px-4 py-3'>
                             <div className='flex items-center gap-2'>
                                 <FaRobot className='text-primary' />
@@ -201,7 +237,7 @@ const LandingPage = () => {
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
             </section>
 
@@ -212,13 +248,26 @@ const LandingPage = () => {
                         <p className='mb-2 text-sm tracking-[0.2em] uppercase text-primary font-fira-code'>Who Am I</p>
                         <h2 className='mb-5 text-4xl md:text-5xl font-clash-display tracking-tight'>About Me</h2>
                         <p className='mb-4 leading-relaxed text-background/85'>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer commodo, justo nec egestas luctus,
-                            turpis lorem facilisis felis, ac interdum nibh velit vitae est.
+                            I build interactive web experiences with a focus on smooth motion, clean architecture, and modern product UI.
+                            My work blends frontend engineering with strong attention to detail in interaction design.
                         </p>
-                        <p className='leading-relaxed text-background/75'>
-                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                            totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta.
+                        <p className='mb-3 leading-relaxed text-background/80'>
+                            <span className='text-primary font-semibold'>Current Focus:</span> Building Web3-ready frontend systems with Next.js,
+                            GSAP-based storytelling sections, and scalable component design.
                         </p>
+                        <p className='mb-6 leading-relaxed text-background/75'>
+                            <span className='text-primary font-semibold'>Current Position:</span> Frontend Developer crafting portfolio-grade interfaces,
+                            dashboard products, and AI-assisted web experiences.
+                        </p>
+
+                        <div className='flex flex-wrap gap-3'>
+                            <Link href='/experience' className='rounded-lg border border-primary/40 bg-primary/15 px-4 py-2 text-sm text-background transition-colors hover:bg-primary/25'>
+                                See More Experience
+                            </Link>
+                            <a href='/cv.pdf' className='rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm text-background/90 transition-colors hover:bg-white/10'>
+                                Download CV
+                            </a>
+                        </div>
                     </div>
 
                     <div className='relative flex items-center justify-center'>

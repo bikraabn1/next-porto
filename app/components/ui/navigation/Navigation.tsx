@@ -5,11 +5,17 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useRef, useState } from "react"
 import { CgClose, CgMenu } from "react-icons/cg"
+import Link from "next/link"
 
 gsap.registerPlugin(ScrollTrigger)
 
 const Navigation = () => {
-    const menus = ['Home', 'Projects', 'Tech Stack', 'Jackson', 'About Me']
+    const menus = [
+        { label: 'Home', href: '/' },
+        { label: 'Projects', href: '/projects' },
+        { label: 'Jackson Bot', href: '/jackson-bot' },
+        { label: 'Experience', href: '/experience' }
+    ]
 
     const topNavRef = useRef<HTMLElement>(null)
     const sideNavRef = useRef<HTMLDivElement>(null)
@@ -43,12 +49,17 @@ const Navigation = () => {
                         ?
                         <nav className="absolute top-[5vh] z-20 flex flex-col bg-primary w-[94vw] h-[90vh] justify-center items-end rounded-3xl right-[3vw] pointer-events-auto">
                             <button className="text-foreground absolute top-8 right-8 cursor-pointer hover:scale-110 ease-in-out duration-150" onClick={() => setIsSideNavOpen(false)}>
-                                <CgClose size={32}/>
+                                <CgClose size={32} />
                             </button>
-                            {menus.map((text, index) => (
-                                <button key={index} className="py-3 px-6 text-foreground hover:scale-105 hover:font-semibold transition-all ease-in-out duration-150 cursor-pointer tracking-wider text-3xl font-fira-code rounded-full">
-                                    {text}
-                                </button>
+                            {menus.map((menu) => (
+                                <Link
+                                    key={menu.href}
+                                    href={menu.href}
+                                    onClick={() => setIsSideNavOpen(false)}
+                                    className="py-3 px-6 text-foreground hover:scale-105 hover:font-semibold transition-all ease-in-out duration-150 cursor-pointer tracking-wider text-3xl font-fira-code rounded-full"
+                                >
+                                    {menu.label}
+                                </Link>
                             ))}
                         </nav>
                         :
@@ -60,10 +71,14 @@ const Navigation = () => {
 
 
             <nav ref={topNavRef} className="fixed top-[5vh] rounded-full left-1/2 -translate-x-1/2 flex gap-3 p-2 bg-surface/60 backdrop-blur-md z-50">
-                {menus.map((text, index) => (
-                    <button key={index} className="py-3 px-6 bg-linear-90 from-orange-600 to-orange-800 text-muted hover:scale-105 transition-all ease-in-out duration-150 cursor-pointer tracking-wider font-fira-code rounded-full">
-                        {text}
-                    </button>
+                {menus.map((menu) => (
+                    <Link
+                        key={menu.href}
+                        href={menu.href}
+                        className="py-3 px-6 bg-linear-90 from-orange-600 to-orange-800 text-muted hover:scale-105 transition-all ease-in-out duration-150 cursor-pointer tracking-wider font-fira-code rounded-full"
+                    >
+                        {menu.label}
+                    </Link>
                 ))}
             </nav>
         </>
