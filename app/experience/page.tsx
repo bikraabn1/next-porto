@@ -1,42 +1,9 @@
 import Link from 'next/link'
-
-const experiences = [
-    {
-        period: '2025 — Present',
-        role: 'Frontend Developer',
-        company: 'Nebula Labs',
-        highlights: [
-            'Built modular Next.js App Router features for a Web3 dashboard ecosystem.',
-            'Introduced animation-driven storytelling sections using GSAP and ScrollTrigger.',
-            'Improved perceived performance with skeleton states and progressive hydration strategies.',
-        ],
-        stack: ['Next.js', 'TypeScript', 'Tailwind CSS v4', 'GSAP'],
-    },
-    {
-        period: '2024 — 2025',
-        role: 'Frontend Engineer Intern',
-        company: 'Vertex Digital Studio',
-        highlights: [
-            'Delivered responsive landing pages and component libraries for startup clients.',
-            'Collaborated with design and backend teams to ship API-driven dashboard modules.',
-            'Optimized accessibility and interaction flows across mobile and desktop views.',
-        ],
-        stack: ['React', 'Next.js', 'Node.js', 'Figma'],
-    },
-    {
-        period: '2023 — 2024',
-        role: 'Freelance Web Developer',
-        company: 'Independent',
-        highlights: [
-            'Designed and developed custom portfolio and business websites end-to-end.',
-            'Created reusable UI sections to speed up delivery while maintaining visual quality.',
-            'Integrated CMS/content workflows for easier client updates and maintenance.',
-        ],
-        stack: ['JavaScript', 'Tailwind CSS', 'CMS', 'Vercel'],
-    },
-]
+import { EXPERIENCE_DATAS } from '../public/datas/experiences'
 
 export default function ExperiencePage() {
+    const experiences = EXPERIENCE_DATAS
+    
     return (
         <main id='main-scroller' className='h-screen overflow-y-auto bg-foreground text-background'>
             <section className='relative mx-auto w-full max-w-6xl px-6 pb-20 pt-40 md:px-10'>

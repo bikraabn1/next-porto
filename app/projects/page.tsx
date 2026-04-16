@@ -24,7 +24,7 @@ export default function ProjectsPage() {
                         <article key={project.title} className='rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md transition-transform duration-300 hover:-translate-y-1'>
                             <div className='mb-4 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-sm text-background/70'>
                                 <img
-                                    src={`https://picsum.photos/seed/${index + 1}/600/400`}
+                                    src={project.imageLink}
                                     alt={project.title}
                                     className='w-full h-full object-cover rounded-xl opacity-80 hover:opacity-100 transition-opacity duration-300'
                                 />

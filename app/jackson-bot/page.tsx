@@ -6,7 +6,7 @@ const messages = [
     { id: 2, role: 'user', content: 'What is the strongest frontend skill in this portfolio?' },
     { id: 3, role: 'assistant', content: 'Strongest area: crafting immersive, animated interfaces using Next.js, Tailwind CSS v4, and GSAP.' },
     { id: 4, role: 'user', content: 'Show me relevant project categories.' },
-    { id: 5, role: 'assistant', content: 'Categories available: Web3 dashboards, analytics interfaces, chatbot UI, and portfolio systems.' },
+    { id: 5, role: 'assistant', content: 'Categories available: Analytics interfaces, chatbot UI, and portfolio systems.' },
 ]
 
 export default function JacksonBotPage() {
@@ -59,6 +59,7 @@ export default function JacksonBotPage() {
                         </div>
                     </div>
                 </div>
+                <p className='w-full text-center py-2 italic text-primary'>This Content is During Development - Coming Soon</p>
             </section>
         </main>
     )

@@ -4,7 +4,7 @@ import type { IconType } from 'react-icons'
 export type Project = {
     title: string
     description: string
-    imagePlaceholder: string
+    imageLink: string
     techStack: string[]
     githubLink?: string
     webLink?: string
