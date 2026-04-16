@@ -37,10 +37,10 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
     return (
         <div ref={containerRef} className="fixed inset-0 z-999 flex flex-col items-center justify-center bg-[#0a0a0a] text-orange-500 font-mono text-xl sm:text-2xl">
             <div ref={textWrapperRef} className="flex flex-col gap-2 items-start">
-                <p className='opacity-0'>{">"} fetching bikra's datas 20%...</p>
-                <p className='opacity-0'>{">"} getting projects 40%...</p>
-                <p className='opacity-0'>{">"} getting tech stack 60%...</p>
-                <p className='opacity-0'>{">"} get ready 80%...</p>
+                <p>{">"} fetching bikra's datas 20%...</p>
+                <p>{">"} getting projects 40%...</p>
+                <p>{">"} getting tech stack 60%...</p>
+                <p>{">"} get ready 80%...</p>
                 <p className="text-white mt-4 font-bold">{">"} welcome...</p>
             </div>
         </div>

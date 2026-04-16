@@ -109,10 +109,10 @@ const LandingPage = () => {
                 <div className="absolute inset-0 h-full w-full bg-overlay bg-[linear-gradient(to_right,var(--color-grid-line)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-grid-line)_1px,transparent_1px)] bg-size-[200px_100px] mask-[radial-gradient(ellipse_60%_60%_at_50%_50%,var(--color-mask-solid)_70%,transparent_100%)]"></div>
                 <div className='absolute bg-orange-600/20 w-160 h-160 rounded-full blur-[120px] pointer-events-none'></div>
                 <div ref={headingNameRef} className='relative flex flex-col items-center justify-center'>
-                    <h1 className='text-[clamp(4rem,20vw,20rem)] tracking-tighter leading-[0.75] font-clash-display'>
+                    <h1 className='text-[clamp(4rem,20vw,20rem)] opacity-0 tracking-tighter leading-[0.75] font-clash-display'>
                         BIKRA
                     </h1>
-                    <h1 className='text-[clamp(4rem,20vw,20rem)] tracking-tighter leading-[0.75] font-clash-display'>
+                    <h1 className='text-[clamp(4rem,20vw,20rem)] opacity-0 tracking-tighter leading-[0.75] font-clash-display'>
                         ABNA
                     </h1>
                 </div>
