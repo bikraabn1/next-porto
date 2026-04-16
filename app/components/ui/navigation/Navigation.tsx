@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useRef, useState } from "react"
 import { CgClose, CgMenu } from "react-icons/cg"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -20,13 +21,17 @@ const Navigation = () => {
     const topNavRef = useRef<HTMLElement>(null)
     const sideNavRef = useRef<HTMLDivElement>(null)
     const [isSideNavOpen, setIsSideNavOpen] = useState<boolean>(false)
+    const pathname = usePathname()
 
     useGSAP(() => {
         gsap.set(sideNavRef.current, { autoAlpha: 0, x: 50 })
+        gsap.set(topNavRef.current, { y: 0, autoAlpha: 1 })
 
-        ScrollTrigger.create({
+        const pageScroller = document.querySelector('#main-scroller') as HTMLElement | null
+
+        const navTrigger = ScrollTrigger.create({
             start: 150,
-            scroller: '#main-scroller',
+            ...(pageScroller ? { scroller: pageScroller } : {}),
 
             onEnter: () => {
                 gsap.to(topNavRef.current, { y: -100, autoAlpha: 0, duration: 0.3 })
@@ -39,7 +44,13 @@ const Navigation = () => {
                 setIsSideNavOpen(false)
             }
         })
-    })
+
+        ScrollTrigger.refresh()
+
+        return () => {
+            navTrigger.kill()
+        }
+    }, { dependencies: [pathname], revertOnUpdate: true })
 
     return (
         <>

@@ -356,8 +356,9 @@ const LandingPage = () => {
                         <p className='mb-2 text-sm tracking-[0.2em] uppercase text-primary font-fira-code'>Who Am I</p>
                         <h2 className='mb-5 text-4xl md:text-5xl font-clash-display tracking-tight'>About Me</h2>
                         <p className='mb-4 leading-relaxed text-background/85'>
-                            I build interactive web experiences with a focus on smooth motion, clean architecture, and modern product UI.
-                            My work blends frontend engineering with strong attention to detail in interaction design.
+                            I build intelligent web applications that bridge the gap between interactive design and machine learning.
+                            As a Frontend Developer and AI Engineer, my work blends smooth UI architecture with AI-driven capabilities
+                            to create smart, scalable digital experiences.
                         </p>
                         <p className='mb-3 leading-relaxed text-background/80'>
                             <span className='text-primary font-semibold'>Current Focus:</span> Building Capstone project as AI Engineer for Coding Camp 2026 by DBS Foundation
