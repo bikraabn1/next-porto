@@ -13,7 +13,7 @@ const Navigation = () => {
     const menus = [
         { label: 'Home', href: '/' },
         { label: 'Projects', href: '/projects' },
-        { label: 'Jackson Bot', href: '/jackson-bot' },
+        { label: 'Jackson', href: '/jackson-bot' },
         { label: 'Experience', href: '/experience' }
     ]
 
@@ -75,7 +75,7 @@ const Navigation = () => {
                     <Link
                         key={menu.href}
                         href={menu.href}
-                        className="py-3 px-6 bg-linear-90 from-orange-600 to-orange-800 text-muted hover:scale-105 transition-all ease-in-out duration-150 cursor-pointer tracking-wider font-fira-code rounded-full"
+                        className="py-2 px-3 md:py-3 md:px-6 text-xs md:text-sm bg-linear-90 from-orange-600 to-orange-800 text-muted hover:scale-105 transition-all ease-in-out duration-150 cursor-pointer tracking-wider font-fira-code rounded-full"
                     >
                         {menu.label}
                     </Link>

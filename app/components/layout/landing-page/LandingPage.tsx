@@ -2,13 +2,13 @@
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useRef, useState } from 'react'
 import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
 import type { IconType } from 'react-icons'
 import { FaArrowUpRightFromSquare, FaGithub, FaRobot } from 'react-icons/fa6'
-import { SiExpress, SiFastapi, SiGraphql, SiMongodb, SiMysql, SiNextdotjs, SiNodedotjs, SiPostgresql, SiPython, SiReact, SiSocketdotio, SiTailwindcss, SiTypescript } from 'react-icons/si'
+import { PiNetworkThin } from 'react-icons/pi'
+import { SiExpress, SiFastapi, SiGraphql, SiNextdotjs, SiNodedotjs, SiPostgresql, SiPython, SiReact, SiSocketdotio, SiTailwindcss, SiTypescript } from 'react-icons/si'
 import Preloader from '../../ui/preloader/Preloader'
-import { FiServer } from 'react-icons/fi'
 
 const LandingPage = () => {
     gsap.registerPlugin(useGSAP)
@@ -19,6 +19,16 @@ const LandingPage = () => {
     const headingNameRef = useRef<HTMLDivElement | null>(null)
     const [isLoading, setIsLoading] = useState<boolean>(true)
 
+    useEffect(() => {
+        const hasLoaded = sessionStorage.getItem('preloaderDone')
+        if (hasLoaded) setIsLoading(false)
+    }, [])
+
+    const handlePreloaderComplete = () => {
+        setIsLoading(false)
+        sessionStorage.setItem('preloaderDone', 'true')
+    }
+
     const projects: {
         title: string
         description: string
@@ -26,28 +36,32 @@ const LandingPage = () => {
         techStack: string[]
         githubLink?: string
         webLink?: string
+        isInternal: boolean
     }[] = [
             {
                 title: 'Bikra`s Web Portfolio',
-                description: 'A modern, interactive portfolio website showcasing projects, skills, and experience with smooth animations and a clean, responsive UI.',
+                description: 'A modern portfolio featuring Web3 visual aesthetics, glassmorphism UI, and smooth GSAP scroll animations to showcase my frontend engineering journey.',
                 imagePlaceholder: 'Web Portofolio',
                 techStack: ['Next.js', 'TypeScript', 'Tailwind', 'GSAP'],
                 githubLink: '#',
-                webLink: '#'
+                webLink: '#',
+                isInternal: false
             },
             {
                 title: 'Hisho AI',
-                description: 'Interactive analytics cards and charts for monitoring contract events, active addresses, and gas behavior over time.',
-                imagePlaceholder: 'Analytics Board Preview',
+                description: 'A Japanese AI secretary web app. Developed and refactored real-time chat streaming features and handled complex calendar rendering logic for optimal performance.',
+                imagePlaceholder: 'Secretary AI Preview',
                 techStack: ['React.js', 'TypeScript', 'Vite', 'GraphQL'],
-                githubLink: '#'
+                githubLink: '#',
+                isInternal: true
             },
             {
-                title: 'NFT Mint Landing',
-                description: 'A conversion-focused mint page with animated hero transitions, whitelist status check, and responsive glassmorphism UI.',
-                imagePlaceholder: 'NFT Mint Preview',
-                techStack: ['Next.js', 'AntDesign', 'RestAPI', 'SocketIO'],
-                githubLink: '#'
+                title: 'Lentera - AI Agent PLN',
+                description: 'Intelligent AI assistants for PLN`s HR and HC departments. Engineered real-time chatbot interactions utilizing Socket.io and managed application state with Zustand.',
+                imagePlaceholder: 'Lentera Preview',
+                techStack: ['Next.js', 'AntDesign', 'RestAPI', 'Socket.io', 'Zustand'],
+                githubLink: '#',
+                isInternal: true
             }
         ]
 
@@ -62,8 +76,17 @@ const LandingPage = () => {
         { name: 'PostgreSQL', icon: SiPostgresql },
         { name: 'Python', icon: SiPython },
         { name: 'FastAPI', icon: SiFastapi },
-        { name: 'RestAPI', icon: FiServer },
+        { name: 'RestAPI', icon: PiNetworkThin },
         { name: 'GraphQL', icon: SiGraphql },
+    ]
+
+    const certification: { name: string, url: string }[] = [
+        { name: 'Belajar Machine Learning untuk Pemula', url: 'https://www.dicoding.com/certificates/81P2OVYVYZOY' },
+        { name: 'Belajar Dasar Pemrograman JavaScript', url: 'https://www.dicoding.com/certificates/MRZMNDVRNPYQ' },
+        { name: 'Belajar Membuat Aplikasi Web dengan React', url: 'https://www.dicoding.com/certificates/07Z60N9OMZQR' },
+        { name: 'Belajar Dasar Pemrograman Web', url: 'https://www.dicoding.com/certificates/N9ZOO2Q16ZG5' },
+        { name: 'Belajar Membuat Front-End Web untuk Pemula', url: 'https://www.dicoding.com/certificates/0LZ02WN0KX65' },
+
     ]
 
     useGSAP(() => {
@@ -125,7 +148,7 @@ const LandingPage = () => {
 
     return (
         <main id='main-scroller' ref={mainRef} className='h-screen w-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth'>
-            {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+            {isLoading && <Preloader onComplete={handlePreloaderComplete} />}
             <section ref={pageContainer} className='page-section relative flex w-full flex-col snap-start items-center justify-center min-h-screen bg-background text-foreground overflow-hidden'>
                 <div className="absolute inset-0 h-full w-full bg-overlay bg-[linear-gradient(to_right,var(--color-grid-line)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-grid-line)_1px,transparent_1px)] bg-size-[200px_100px] mask-[radial-gradient(ellipse_60%_60%_at_50%_50%,var(--color-mask-solid)_70%,transparent_100%)]"></div>
                 <div className='absolute bg-orange-600/20 w-160 h-160 rounded-full blur-[120px] pointer-events-none'></div>
@@ -137,11 +160,9 @@ const LandingPage = () => {
                         ABNA
                     </h1>
                 </div>
-
             </section>
 
             <section className='page-section relative flex w-full flex-col snap-start items-center justify-center min-h-screen bg-foreground text-background overflow-hidden'>
-                <div className='pointer-events-none absolute -top-16 left-10 h-52 w-52 rounded-full bg-primary/20 blur-3xl'></div>
                 <div className='w-full max-w-7xl px-6 py-16 md:px-10'>
                     <div className='mb-10 flex items-end justify-between gap-4'>
                         <div>
@@ -167,11 +188,13 @@ const LandingPage = () => {
                                     ))}
                                 </div>
 
-                                <a href={project.githubLink} className='inline-flex items-center gap-2 rounded-lg border border-white/15 px-3 py-2 text-sm hover:bg-white/10 transition-colors'>
-                                    <FaGithub />
-                                    View Source
-                                    <FaArrowUpRightFromSquare className='text-xs' />
-                                </a>
+                                {
+                                    !project.isInternal && <a href={project.githubLink} className='inline-flex items-center gap-2 rounded-lg border border-white/15 px-3 py-2 text-sm hover:bg-white/10 transition-colors'>
+                                        <FaGithub />
+                                        View Source
+                                        <FaArrowUpRightFromSquare className='text-xs' />
+                                    </a>
+                                }
                             </article>
                         ))}
                     </div>
@@ -179,7 +202,6 @@ const LandingPage = () => {
             </section>
 
             <section className='page-section relative flex w-full flex-col snap-start items-center justify-center min-h-screen bg-foreground text-background overflow-hidden'>
-                <div className='pointer-events-none absolute -right-10 top-20 h-56 w-56 rounded-full bg-orange-500/20 blur-3xl'></div>
                 <div className='w-full max-w-6xl px-6 py-16 md:px-10'>
                     <p className='mb-2 text-sm tracking-[0.2em] uppercase text-primary font-fira-code'>Tools I Use</p>
                     <h2 className='mb-10 text-4xl md:text-5xl font-clash-display tracking-tight'>Tech Stack</h2>
@@ -195,6 +217,59 @@ const LandingPage = () => {
                                 </div>
                             )
                         })}
+                    </div>
+                </div>
+            </section>
+
+            <section className='page-section relative flex w-full flex-col snap-start items-center justify-center min-h-screen bg-foreground text-background overflow-hidden'>
+                <div className='w-full max-w-6xl px-6 py-16 md:px-10'>
+                    <p className='mb-2 text-sm tracking-[0.2em] uppercase text-primary font-fira-code'>Continuous Learning</p>
+                    <h2 className='mb-10 text-4xl md:text-5xl font-clash-display tracking-tight'>Certifications</h2>
+
+                    <div className='grid gap-6 lg:grid-cols-12'>
+                        <article className='relative overflow-hidden rounded-3xl border border-primary/30 bg-linear-to-br from-primary/20 via-white/5 to-transparent p-6 backdrop-blur-md lg:col-span-5'>
+                            <div className='absolute -right-8 -top-8 h-28 w-28 rounded-full bg-primary/20 blur-2xl'></div>
+                            <p className='mb-3 text-xs tracking-[0.2em] uppercase text-primary/90 font-fira-code'>Featured Badge</p>
+                            <h3 className='mb-4 text-2xl font-semibold leading-snug text-background/95'>{certification[0].name}</h3>
+                            <p className='mb-6 text-sm leading-relaxed text-background/75'>
+                                Core foundation in machine learning concepts, model workflow, and practical AI implementation.
+                            </p>
+                            <a
+                                href={certification[0].url}
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                className='inline-flex items-center gap-2 rounded-lg border border-primary/40 bg-primary/15 px-4 py-2 text-sm text-background transition-colors hover:bg-primary/25'
+                            >
+                                View Featured Certificate
+                                <FaArrowUpRightFromSquare className='text-xs' />
+                            </a>
+                        </article>
+
+                        <div className='space-y-4 lg:col-span-7'>
+                            {certification.slice(1).map((cert, index) => (
+                                <article
+                                    key={cert.name}
+                                    className='group flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-white/10'
+                                >
+                                    <div className='flex items-start gap-4'>
+                                        <span className='mt-0.5 rounded-md border border-primary/30 bg-primary/10 px-2 py-1 text-xs font-fira-code text-primary'>
+                                            0{index + 2}
+                                        </span>
+                                        <h3 className='text-base font-medium leading-snug text-background/90'>{cert.name}</h3>
+                                    </div>
+
+                                    <a
+                                        href={cert.url}
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                        className='inline-flex shrink-0 items-center gap-2 rounded-lg border border-white/15 px-3 py-2 text-xs text-background/90 transition-colors group-hover:border-primary/40 group-hover:bg-primary/10'
+                                    >
+                                        Open
+                                        <FaArrowUpRightFromSquare className='text-[10px]' />
+                                    </a>
+                                </article>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
@@ -242,7 +317,6 @@ const LandingPage = () => {
             </section>
 
             <section className='page-section relative flex w-full flex-col snap-start items-center justify-center min-h-screen bg-foreground text-background overflow-hidden'>
-                <div className='pointer-events-none absolute bottom-0 right-0 h-64 w-64 rounded-full bg-primary/20 blur-3xl'></div>
                 <div className='grid w-full max-w-6xl items-center gap-10 px-6 py-16 md:grid-cols-2 md:px-10'>
                     <div>
                         <p className='mb-2 text-sm tracking-[0.2em] uppercase text-primary font-fira-code'>Who Am I</p>
@@ -252,12 +326,10 @@ const LandingPage = () => {
                             My work blends frontend engineering with strong attention to detail in interaction design.
                         </p>
                         <p className='mb-3 leading-relaxed text-background/80'>
-                            <span className='text-primary font-semibold'>Current Focus:</span> Building Web3-ready frontend systems with Next.js,
-                            GSAP-based storytelling sections, and scalable component design.
+                            <span className='text-primary font-semibold'>Current Focus:</span> Building Capstone project as AI Engineer for Coding Camp 2026 by DBS Foundation
                         </p>
                         <p className='mb-6 leading-relaxed text-background/75'>
-                            <span className='text-primary font-semibold'>Current Position:</span> Frontend Developer crafting portfolio-grade interfaces,
-                            dashboard products, and AI-assisted web experiences.
+                            <span className='text-primary font-semibold'>Current Position:</span> Cohort Coding Camp 2026 by DBS Foundation and Last Year Student at Polytechnics Cilacap State
                         </p>
 
                         <div className='flex flex-wrap gap-3'>
