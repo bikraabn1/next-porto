@@ -13,7 +13,8 @@ export type Project = {
 
 export type TechStack = { 
     name: string, 
-    icon: IconType 
+    icon: IconType,
+    docsLink: string
 }
 
 export type Certification = { 
