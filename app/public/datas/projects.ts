@@ -22,8 +22,16 @@ export const PROJECT_DATAS: Project[] = [
         title: 'Lentera - AI Agent PLN',
         description: 'Intelligent AI assistants for PLN`s HR and HC departments. Engineered real-time chatbot interactions utilizing Socket.io and managed application state with Zustand.',
         imageLink: '/image/projects/lentera.jpeg',
-        techStack: ['Next.js', 'AntDesign', 'RestAPI', 'Socket.io', 'Zustand'],
+        techStack: ['Next.js', 'JavaScript','AntDesign', 'RestAPI', 'Socket.io', 'Zustand'],
         githubLink: '#',
         isInternal: true
-    }
+    },
+    {
+        title: 'PLN Health Analytics',
+        description: 'Developed data-driven dashboard interfaces to visualize complex analytics, ensuring high performance and accessibility.',
+        imageLink: '/image/projects/health-analytics.jpeg',
+        techStack: ['Next.js', 'JavaScript', 'AntDesign', 'RestAPI', 'Zustand'],
+        githubLink: '#',
+        isInternal: true
+    },
 ]
