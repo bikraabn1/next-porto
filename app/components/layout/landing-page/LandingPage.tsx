@@ -315,7 +315,7 @@ const LandingPage = () => {
                             <Link href='/experience' className='rounded-lg border border-primary/40 bg-primary/15 px-4 py-2 text-sm text-background transition-colors hover:bg-primary/25'>
                                 See More Experience
                             </Link>
-                            <a href='/Bikra_Abna_CV.pdf' download='cv.pdf' className='rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm text-background/90 transition-colors hover:bg-white/10'>
+                            <a href='/bikraabna.pdf' download='Bikra_Abna_CV.pdf' className='rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm text-background/90 transition-colors hover:bg-white/10'>
                                 Download CV
                             </a>
                         </div>
