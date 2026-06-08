@@ -25,7 +25,7 @@ const clashDisplay = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Portofolio - Bikra Abna",
+  title: "Bikra Abna Filqiyast Dzaki",
   description: "Web Portfolio by Bikra Abna",
 };
 
