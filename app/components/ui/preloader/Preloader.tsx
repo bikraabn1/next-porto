@@ -13,8 +13,8 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
         const tl = gsap.timeline({
             onComplete: () => {
                 gsap.to(containerRef.current, {
-                    yPercent: -100,
                     duration: 0.8,
+                    opacity: 0,
                     ease: "power4.inOut",
                     onComplete: onComplete 
                 })
@@ -37,11 +37,11 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
     return (
         <div ref={containerRef} className="fixed inset-0 z-999 flex flex-col items-center justify-center bg-[#0a0a0a] text-orange-500 font-mono text-xl sm:text-2xl">
             <div ref={textWrapperRef} className="flex flex-col gap-2 items-start">
-                <p>{">"} fetching bikra's datas 20%...</p>
-                <p>{">"} getting projects 40%...</p>
-                <p>{">"} getting tech stack 60%...</p>
-                <p>{">"} get ready 80%...</p>
-                <p className="text-white mt-4 font-bold">{">"} welcome...</p>
+                <p className='opacity-0'>{">"} fetching bikra&apos;s datas 20%</p>
+                <p className='opacity-0'>{">"} getting projects 40%</p>
+                <p className='opacity-0'>{">"} getting tech stack 60%</p>
+                <p className='opacity-0'>{">"} get ready 80%</p>
+                <p className="text-white mt-4 font-bold opacity-0">{">"} welcome...</p>
             </div>
         </div>
     )
