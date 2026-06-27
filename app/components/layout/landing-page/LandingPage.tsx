@@ -147,8 +147,8 @@ const LandingPage = () => {
                                     <Image
                                         src={project.imageLink}
                                         alt={project.title}
-                                        width={2400}
-                                        height={1200}
+                                        width={600}
+                                        height={600}
                                         className='w-full h-full object-cover rounded-xl opacity-80 hover:opacity-100 transition-opacity duration-300'
                                     />
                                 </div>

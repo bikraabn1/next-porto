@@ -27,6 +27,8 @@ export default function ProjectsPage() {
                                 <Image
                                     src={project.imageLink}
                                     alt={project.title}
+                                    height={300}
+                                    width={300}
                                     className='w-full h-full object-cover rounded-xl opacity-80 hover:opacity-100 transition-opacity duration-300'
                                 />
                             </div>
