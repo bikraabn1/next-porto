@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { FaArrowUpRightFromSquare, FaGithub } from 'react-icons/fa6'
 import { PROJECT_DATAS } from '../public/datas/projects'
+import Image from 'next/image'
 
 export default function ProjectsPage() {
     const projects = PROJECT_DATAS
@@ -20,10 +21,10 @@ export default function ProjectsPage() {
                 </div>
 
                 <div className='grid gap-6 md:grid-cols-2'>
-                    {projects.map((project, index) => (
+                    {projects.map((project) => (
                         <article key={project.title} className='rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md transition-transform duration-300 hover:-translate-y-1'>
                             <div className='mb-4 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-sm text-background/70'>
-                                <img
+                                <Image
                                     src={project.imageLink}
                                     alt={project.title}
                                     className='w-full h-full object-cover rounded-xl opacity-80 hover:opacity-100 transition-opacity duration-300'

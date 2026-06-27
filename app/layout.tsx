@@ -25,8 +25,48 @@ const clashDisplay = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Bikra Abna Filqiyast Dzaki",
+  metadataBase: new URL('https://bikraabna.tech'),
+  title: {
+    default : "Bikra Abna Filqiyast Dzaki | Frontend Developer",
+    template : "%s | Bikra Abna Filqiyast Dzaki"
+  },
   description: "Web Portfolio by Bikra Abna",
+  keywords: [
+    "Bikra Abna Filqiyast Dzaki",
+    "Bikra",
+    "Front-End Developer",
+    "React Developer",
+    "Next.js Developer",
+    "Web Developer Indonesia",
+  ],
+  authors: [{
+    name: "Bikra Abna Filqiyast Dzaki"
+  }],
+  creator: "Bikra Abna Filqiyast Dzaki",
+  alternates: {
+    canonical: "/"
+  },
+  openGraph: {
+    title: "Bikra Abna Filqiyast Dzaki | Front-End Developer",
+    description:
+      "Official portfolio of Bikra Abna Filqiyast Dzaki.",
+    url: "https://domainlu.tech",
+    siteName: "Bikra Portfolio",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/image/profile/profile.png",
+        width: 1200,
+        height: 630,
+        alt: "Bikra Portfolio",
+      },
+    ],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  }
 };
 
 export default function RootLayout({
