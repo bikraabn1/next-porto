@@ -193,7 +193,10 @@ const LandingPage = () => {
 
                             return (
                                 <Link key={tech.name} href={tech.docsLink} className='group flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-md transition-all duration-300 hover:border-primary/40 hover:bg-white/10 cursor-pointer'>
-                                    <Icon className='text-xl text-primary transition-transform duration-300 group-hover:scale-110' />
+                                    <Icon
+                                        className='text-xl text-primary transition-transform duration-300 group-hover:scale-110'
+                                        aria-hidden
+                                    />
                                     <span className='text-sm font-medium text-background/90'>{tech.name}</span>
                                 </Link>
                             )
