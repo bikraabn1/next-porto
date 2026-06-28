@@ -28,8 +28,8 @@ const clashDisplay = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL('https://bikraabna.tech'),
   title: {
-    default : "Bikra Abna Filqiyast Dzaki | Frontend Developer",
-    template : "%s | Bikra Abna Filqiyast Dzaki"
+    default: "Bikra Abna Filqiyast Dzaki | Frontend Developer",
+    template: "%s | Bikra Abna Filqiyast Dzaki"
   },
   description: "Web Portfolio by Bikra Abna",
   keywords: [
@@ -82,8 +82,8 @@ export default function RootLayout({
       >
         <Navbar />
         {children}
+        <SpeedInsights />
       </body>
-      <SpeedInsights/>
     </html>
   );
 }
