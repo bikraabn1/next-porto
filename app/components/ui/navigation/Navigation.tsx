@@ -38,7 +38,7 @@ const SideNav = ({ menus, isSideNavOpen, setIsSideNavOpen, sideNavRef, isHome }:
 }) => {
     const content = isSideNavOpen ? (
         <nav className="absolute top-[5vh] z-20 flex flex-col bg-primary w-[94vw] h-[90vh] justify-center items-end rounded-3xl right-[3vw] pointer-events-auto">
-            <button className="text-foreground absolute top-8 right-8 cursor-pointer hover:scale-110 ease-in-out duration-150" onClick={() => setIsSideNavOpen(false)}>
+            <button aria-label="Navigation Humberger Button Close" className="text-foreground absolute top-8 right-8 cursor-pointer hover:scale-110 ease-in-out duration-150" onClick={() => setIsSideNavOpen(false)}>
                 <CgClose size={32} />
             </button>
             {menus.map((menu) => (
@@ -53,7 +53,7 @@ const SideNav = ({ menus, isSideNavOpen, setIsSideNavOpen, sideNavRef, isHome }:
             ))}
         </nav>
     ) : (
-        <button className="absolute top-5 md:top-10 right-5 md:right-10 z-20 cursor-pointer bg-primary rounded-full p-2 lg:p-4 pointer-events-auto hover:scale-110 transition-transform" onClick={() => setIsSideNavOpen(true)}>
+        <button aria-label="Navigation Humberger Button Open" className="absolute top-5 md:top-10 right-5 md:right-10 z-20 cursor-pointer bg-primary rounded-full p-2 lg:p-4 pointer-events-auto hover:scale-110 transition-transform" onClick={() => setIsSideNavOpen(true)}>
             <CgMenu className="text-foreground text-lg lg:text-2xl" />
         </button>
     );

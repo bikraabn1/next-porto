@@ -11,7 +11,7 @@ const messages = [
 
 export default function JacksonBotPage() {
     return (
-          <main id='main-scroller' className='h-screen overflow-y-auto bg-foreground text-background'>
+        <main id='main-scroller' className='h-screen overflow-y-auto bg-foreground text-background'>
             <section className='relative mx-auto w-full max-w-6xl px-6 pb-20 pt-40 md:px-10'>
                 <div className='mb-8 flex flex-wrap items-end justify-between gap-4'>
                     <div>
@@ -37,8 +37,8 @@ export default function JacksonBotPage() {
                             <div
                                 key={message.id}
                                 className={`max-w-[85%] rounded-xl px-4 py-3 text-sm ${message.role === 'assistant'
-                                        ? 'border border-white/10 bg-white/5 text-background/90'
-                                        : 'ml-auto border border-primary/30 bg-primary/15 text-background'
+                                    ? 'border border-white/10 bg-white/5 text-background/90'
+                                    : 'ml-auto border border-primary/30 bg-primary/15 text-background'
                                     }`}
                             >
                                 {message.content}
