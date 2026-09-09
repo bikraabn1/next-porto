@@ -32,9 +32,6 @@ export const metadata: Metadata = {
     template: "%s | Bikra Abna Filqiyast Dzaki"
   },
   description: "Web Portfolio by Bikra Abna",
-  icons: {
-    icon: '/icon.svg'
-  },
   keywords: [
     "Bikra Abna Filqiyast Dzaki",
     "Bikra",
@@ -54,7 +51,7 @@ export const metadata: Metadata = {
     title: "Bikra Abna Filqiyast Dzaki | Front-End Developer",
     description:
       "Official portfolio of Bikra Abna Filqiyast Dzaki.",
-    url: "https://domainlu.tech",
+    url: "https://bikraabna.tech",
     siteName: "Bikra Portfolio",
     locale: "en_US",
     type: "website",
