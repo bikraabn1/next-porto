@@ -4,7 +4,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import { FaArrowUpRightFromSquare, FaGithub, FaRobot } from 'react-icons/fa6'
+import { FaArrowUpRightFromSquare, FaGithub, FaGlobe, FaRobot } from 'react-icons/fa6'
 import Preloader from '../../ui/preloader/Preloader'
 import { PROJECT_DATAS } from '@/app/public/datas/projects'
 import { TECH_STACK_DATAS } from '@/app/public/datas/tech-stack'
@@ -141,7 +141,7 @@ const LandingPage = () => {
                     </div>
 
                     <div className='grid gap-6 md:grid-cols-2 xl:grid-cols-3'>
-                        {projects.map((project) => (
+                        {projects.slice(0, 6).map((project) => (
                             <article key={project.title} className='rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md transition-transform duration-300 hover:-translate-y-1'>
                                 <div className='mb-4 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-sm text-background/70'>
                                     <Image
@@ -167,6 +167,14 @@ const LandingPage = () => {
                                     !project.isInternal && <a href={project.githubLink} className='inline-flex items-center gap-2 rounded-lg border border-white/15 px-3 py-2 text-sm hover:bg-white/10 transition-colors'>
                                         <FaGithub />
                                         View Source
+                                        <FaArrowUpRightFromSquare className='text-xs' />
+                                    </a>
+                                }
+
+                                {
+                                    !project.webLink && <a href={project.webLink} className='inline-flex items-center gap-2 rounded-lg border border-white/15 px-3 py-2 text-sm hover:bg-white/10 transition-colors'>
+                                        <FaGlobe />
+                                        View Page
                                         <FaArrowUpRightFromSquare className='text-xs' />
                                     </a>
                                 }
@@ -305,16 +313,19 @@ const LandingPage = () => {
                     <div>
                         <p className='mb-2 text-sm tracking-[0.2em] uppercase text-primary font-fira-code'>Who Am I</p>
                         <h2 className='mb-5 text-4xl md:text-5xl font-clash-display tracking-tight'>About Me</h2>
+
                         <p className='mb-4 leading-relaxed text-background/85'>
-                            I build intelligent web applications that bridge the gap between interactive design and machine learning.
-                            As a Frontend Developer and AI Engineer, my work blends smooth UI architecture with AI-driven capabilities
-                            to create smart, scalable digital experiences.
+                            I build intelligent web applications that bridge the gap between interactive design and robust system integration.
+                            As a Frontend Engineer, my work blends scalable UI architecture with modern web capabilities to deliver high-performance,
+                            reliable digital experiences across production-grade products.
                         </p>
                         <p className='mb-3 leading-relaxed text-background/80'>
-                            <span className='text-primary font-semibold'>Current Focus:</span> Building Capstone project as AI Engineer for Coding Camp 2026 by DBS Foundation
+                            <span className='text-primary font-semibold'>Current Focus:</span> Developing core features across internal client projects,
+                            including unit testing for <strong>SociaLens</strong>, responsive landing pages for <strong>LPMUKP</strong>, and interactive
+                            media components (audio player integration, voice recording, and AI summary fetching) for <strong>Sentriva</strong>.
                         </p>
                         <p className='mb-6 leading-relaxed text-background/75'>
-                            <span className='text-primary font-semibold'>Current Position:</span> Cohort Coding Camp 2026 by DBS Foundation and Last Year Student at Polytechnics Cilacap State
+                            <span className='text-primary font-semibold'>Current Position:</span> Frontend Engineer Intern at PT Adma Digital Solusi
                         </p>
 
                         <div className='flex flex-wrap gap-3'>

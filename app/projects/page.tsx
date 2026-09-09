@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { FaArrowUpRightFromSquare, FaGithub } from 'react-icons/fa6'
+import { FaArrowUpRightFromSquare, FaGithub, FaGlobe } from 'react-icons/fa6'
 import { PROJECT_DATAS } from '../public/datas/projects'
 import Image from 'next/image'
 
@@ -23,11 +23,11 @@ export default function ProjectsPage() {
                 <div className='grid gap-6 md:grid-cols-2'>
                     {projects.map((project) => (
                         <article key={project.title} className='rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md transition-transform duration-300 hover:-translate-y-1'>
-                            <div className='mb-4 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-sm text-background/70'>
+                            <div className='mb-4 flex h-70 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-sm text-background/70'>
                                 <Image
                                     src={project.imageLink}
                                     alt={project.title}
-                                    height={300}
+                                    height={500}
                                     width={300}
                                     className='w-full h-full object-cover rounded-xl opacity-80 hover:opacity-100 transition-opacity duration-300'
                                 />
@@ -47,6 +47,14 @@ export default function ProjectsPage() {
                                 !project.isInternal && <a href={project.githubLink} className='inline-flex items-center gap-2 rounded-lg border border-white/15 px-3 py-2 text-sm hover:bg-white/10 transition-colors'>
                                     <FaGithub />
                                     View Source
+                                    <FaArrowUpRightFromSquare className='text-xs' />
+                                </a>
+                            }
+
+                            {
+                                project.webLink && <a href={project.webLink} className='inline-flex items-center gap-2 rounded-lg border border-white/15 px-3 py-2 text-sm hover:bg-white/10 transition-colors'>
+                                    <FaGlobe />
+                                    View Page
                                     <FaArrowUpRightFromSquare className='text-xs' />
                                 </a>
                             }

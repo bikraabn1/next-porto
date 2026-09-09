@@ -1,6 +1,18 @@
 export const EXPERIENCE_DATAS = [
     {
-        period: '2026 — Present',
+        period: 'June 2026 - Present',
+        role: 'Frontend Engineer Intern',
+        company: 'PT Adma Digital Solusi',
+        highlights: [
+            'Engineered responsive, production-ready web interfaces using Next.js, React, and TypeScript with robust state management.',
+            'Integrated AI-powered summary features by consuming REST APIs to deliver intuitive, real-time insights for end-users.',
+            'Translated UI/UX wireframes and design systems into reusable, high-performance components across mobile and desktop platforms.',
+            'Implemented automated end-to-end (E2E) testing suites using Playwright to validate critical user flows and guarantee release stability.',
+        ],
+        stack: ['React.js', 'Next.js', 'ExpressJS', 'Playwright', 'Git', 'Postgres'],
+    },
+    {
+        period: 'February 2026 — May 2026',
         role: 'AI Engineer Cohort at Coding Camp 2026 by DBS Foundation',
         company: 'Dicoding',
         highlights: [
@@ -21,7 +33,7 @@ export const EXPERIENCE_DATAS = [
             'Adapted quickly to different UI libraries and design systems based on project needs.',
             'Ensured consistent layout and usability across mobile and desktop devices.',
         ],
-        stack: ['React.js', 'Next.js', 'Docker', 'PM2'],
+        stack: ['React.js', 'Next.js', 'Docker', 'PM2', 'Git'],
     },
     {
         period: 'April 2025',
