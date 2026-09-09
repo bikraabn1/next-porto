@@ -73,7 +73,7 @@ const Navigation = () => {
     const menus: MenuProps[] = [
         { label: 'Home', href: '/' },
         { label: 'Projects', href: '/projects' },
-        { label: 'Jackson', href: '/jackson-bot' },
+        // { label: 'Jackson', href: '/jackson-bot' },
         { label: 'Experience', href: '/experience' }
     ]
 

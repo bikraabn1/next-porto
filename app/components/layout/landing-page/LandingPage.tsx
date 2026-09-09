@@ -1,15 +1,15 @@
 'use client'
+import { CERTIFICATION_DATAS } from '@/app/public/datas/certification'
+import { PROJECT_DATAS } from '@/app/public/datas/projects'
+import { TECH_STACK_DATAS } from '@/app/public/datas/tech-stack'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import { FaArrowUpRightFromSquare, FaGithub, FaGlobe, FaRobot } from 'react-icons/fa6'
+import { FaArrowUpRightFromSquare, FaGithub, FaGlobe } from 'react-icons/fa6'
 import Preloader from '../../ui/preloader/Preloader'
-import { PROJECT_DATAS } from '@/app/public/datas/projects'
-import { TECH_STACK_DATAS } from '@/app/public/datas/tech-stack'
-import { CERTIFICATION_DATAS } from '@/app/public/datas/certification'
-import Image from 'next/image'
 
 const LandingPage = () => {
     gsap.registerPlugin(useGSAP)
@@ -266,7 +266,7 @@ const LandingPage = () => {
                 </div>
             </section>
 
-            <section className='page-section flex w-full flex-col snap-start items-center justify-center min-h-screen bg-foreground text-background'>
+            {/* <section className='page-section flex w-full flex-col snap-start items-center justify-center min-h-screen bg-foreground text-background'>
                 <div className='w-full max-w-4xl px-6 py-16 md:px-10'>
                     <p className='mb-2 text-sm tracking-[0.2em] uppercase text-primary font-fira-code'>Interactive Demo</p>
                     <h2 className='mb-8 text-4xl md:text-5xl font-clash-display tracking-tight'>Jackson Bot</h2>
@@ -306,7 +306,7 @@ const LandingPage = () => {
                         </div>
                     </Link>
                 </div>
-            </section>
+            </section> */}
 
             <section className='page-section relative flex w-full flex-col snap-start items-center justify-center min-h-screen bg-foreground text-background overflow-hidden'>
                 <div className='grid w-full max-w-6xl items-center gap-10 px-6 py-16 md:grid-cols-2 md:px-10'>
