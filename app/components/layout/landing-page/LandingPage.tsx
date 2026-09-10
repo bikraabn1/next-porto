@@ -172,7 +172,7 @@ const LandingPage = () => {
                                 }
 
                                 {
-                                    !project.webLink && <a href={project.webLink} className='inline-flex items-center gap-2 rounded-lg border border-white/15 px-3 py-2 text-sm hover:bg-white/10 transition-colors'>
+                                    project.webLink && <a href={project.webLink} className='inline-flex items-center gap-2 rounded-lg border border-white/15 px-3 py-2 text-sm hover:bg-white/10 transition-colors'>
                                         <FaGlobe />
                                         View Page
                                         <FaArrowUpRightFromSquare className='text-xs' />
