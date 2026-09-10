@@ -1,7 +1,7 @@
 export const EXPERIENCE_DATAS = [
     {
         period: 'June 2026 - Present',
-        role: 'Frontend Engineer Intern',
+        role: 'Frontend Developer Intern',
         company: 'PT Adma Digital Solusi',
         highlights: [
             'Engineered responsive, production-ready web interfaces using Next.js, React, and TypeScript with robust state management.',
@@ -24,7 +24,7 @@ export const EXPERIENCE_DATAS = [
     },
     {
         period: 'July 2025 - January 2026',
-        role: 'Frontend Engineer Intern',
+        role: 'Frontend Developer Intern',
         company: 'PT Wiratek Solusi Asia',
         highlights: [
             'Developed responsive UI components using React and Next.js.',
