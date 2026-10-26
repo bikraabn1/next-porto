@@ -1,34 +1,25 @@
 import type { Metadata } from "next";
-import { Fira_Code, Geist, Geist_Mono } from "next/font/google";
+import { Martian_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "./components/ui/navigation/Navigation";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const martianMono = Martian_Mono({
+  variable: "--font-martian-mono",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const firaCode = Fira_Code({
-  variable: "--font-fira-code",
-  weight: ['300', '400', '500', '600', '700']
-})
-
-const clashDisplay = localFont({
-  src: "./public/fonts/ClashDisplay/ClashDisplay-Bold.woff2",
-  variable: "--font-clash-display",
+const uncutSans = localFont({
+  src: "../public/fonts/UncutSans/UncutSans-Variable.woff2",
+  variable: "--font-uncut-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://bikraabna.tech'),
   title: {
-    default: "Bikra Abna Filqiyast Dzaki | Frontend Developer",
+    default: "Bikra Abna Filqiyast Dzaki | Fullstack Developer",
     template: "%s | Bikra Abna Filqiyast Dzaki"
   },
   description: "Web Portfolio by Bikra Abna",
@@ -47,8 +38,17 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/"
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/icon.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   openGraph: {
-    title: "Bikra Abna Filqiyast Dzaki | Front-End Developer",
+    title: "Bikra Abna Filqiyast Dzaki | Fullstack Developer",
     description:
       "Official portfolio of Bikra Abna Filqiyast Dzaki.",
     url: "https://bikraabna.tech",
@@ -78,7 +78,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${clashDisplay.variable} ${firaCode.variable} ${geistMono.variable} antialiased`}
+        className={`${uncutSans.variable} ${martianMono.variable} antialiased selection:bg-signal selection:text-white`}
       >
         <Navbar />
         {children}

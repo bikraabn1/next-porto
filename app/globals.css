@@ -1,59 +1,87 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #f8f9fa;
-  --primary: #f68048;
-  --surface: #171717;
-  --overlay: #0a0a0a;
-  --muted: #e2e8f0;
-  --grid-line: #ffffff0a;
-  --mask-solid: #000000;
+  --background: #ffffff;
+  --foreground: #09090b;
+  --signal: #ff0000;
+  --ink: #09090b;
+  --paper: #fafafa;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-surface: var(--surface);
-  --color-overlay: var(--overlay);
-  --color-muted: var(--muted);
-  --color-grid-line: var(--grid-line);
-  --color-mask-solid: var(--mask-solid);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-fira-code: var(--font-fira-code);
-  --font-clash-display: var(--font-clash-display)
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #09090b;
+  --color-ink: #09090b;
+  --color-signal: #ff0000;
+  --color-paper: #fafafa;
+  --font-uncut: var(--font-uncut-sans);
+  --font-mono: var(--font-martian-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #f8f9fa;
-  }
+.text-signal {
+  color: #ff0000 !important;
+}
+
+.bg-signal {
+  background-color: #ff0000 !important;
+}
+
+.border-signal {
+  border-color: #ff0000 !important;
+}
+
+.hover\:text-signal:hover {
+  color: #ff0000 !important;
+}
+
+.hover\:bg-signal:hover {
+  background-color: #ff0000 !important;
+}
+
+.group:hover .group-hover\:text-signal {
+  color: #ff0000 !important;
+}
+
+.bg-paper {
+  background-color: #fafafa !important;
+}
+
+.hover\:bg-paper:hover {
+  background-color: #fafafa !important;
+}
+
+.group:hover .group-hover\:bg-paper {
+  background-color: #fafafa !important;
+}
+
+.text-ink {
+  color: #09090b !important;
+}
+
+.bg-ink {
+  background-color: #09090b !important;
 }
 
 html,
 body {
-  height: 100%;
+  min-height: 100%;
   margin: 0;
-  overflow: hidden;
+  background: #ffffff;
+  color: #09090b;
+  font-family: var(--font-uncut-sans), sans-serif;
+  overflow-x: hidden;
+  letter-spacing: -0.01em;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
-* {
-  scrollbar-width: none;
-}
-
-*::-webkit-scrollbar {
-  display: none;
-}
-
-* {
-  -ms-overflow-style: none;
+.animate-marquee {
+  animation: marquee 32s linear infinite;
 }
