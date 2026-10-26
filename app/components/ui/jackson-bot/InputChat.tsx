@@ -1,7 +1,6 @@
 'use client'
 
 import { SyntheticEvent, useState } from "react"
-import { IoSend } from "react-icons/io5"
 
 type InputChatProps = {
     sendMessage: (message: { text: string }) => Promise<void>
@@ -20,11 +19,12 @@ const InputChat = ({ sendMessage, isLoading }: InputChatProps) => {
     }
 
     return (
-        <div className='px-4 py-3 md:px-6'>
-            <form onSubmit={handleSubmit} className='flex items-center gap-3 rounded-xl border border-background/10 bg-background/5 px-4 py-2.5 transition-colors focus-within:border-primary/30'>
+        <div className='p-4 sm:p-5'>
+            <form onSubmit={handleSubmit} className='flex items-center gap-3 border border-black/15 bg-white px-4 py-3 transition-colors focus-within:border-black'>
+                <span className='font-mono text-xs text-signal font-bold select-none'>&gt;</span>
                 <input
-                    placeholder="Ask me about Bikra's projects..."
-                    className='w-full bg-transparent text-sm text-background/80 outline-none placeholder:text-background/30'
+                    placeholder="Query skills, trajectory, or specific projects..."
+                    className='w-full bg-transparent font-mono text-xs sm:text-sm text-black outline-none placeholder:text-black/30'
                     onChange={(e) => setInput(e.target.value)}
                     value={input}
                     disabled={isLoading}
@@ -32,9 +32,9 @@ const InputChat = ({ sendMessage, isLoading }: InputChatProps) => {
                 <button
                     type="submit"
                     disabled={!input.trim() || isLoading}
-                    className='flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/80 text-foreground transition-all hover:bg-primary disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer'
+                    className='font-mono text-[11px] font-bold uppercase px-4 py-1.5 bg-black text-white hover:bg-signal transition-colors disabled:opacity-20 disabled:cursor-not-allowed cursor-pointer'
                 >
-                    <IoSend size={14} />
+                    ENTER &rarr;
                 </button>
             </form>
         </div>

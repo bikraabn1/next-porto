@@ -35,7 +35,11 @@ Fresh graduate D3 Informatics Engineering from Politeknik Negeri Cilacap (GPA 3.
 
 ### Work Experience
 
-**PT Adma Digital Solusi** — Frontend Developer Intern (Remote) | June 2026 – Present
+**PT Tiga Serangkai Pustaka Mandiri** — Fullstack Developer Intern | September 2026 – Present
+- Building end-to-end fullstack features across web services for educational publishing ecosystems
+- Developing database schemas, REST APIs, and responsive frontend modules
+
+**PT Adma Digital Solusi** — Frontend Developer Intern (Remote) | June 2026 – September 2026
 - Built interactive modules for Sentriva AI note-taker (REST API integration for audio recording, playback, and AI summary)
 - Sliced UI/UX designs into responsive landing pages for LPMUKP
 - Implemented unit testing for SociaLens components
@@ -45,8 +49,8 @@ Fresh graduate D3 Informatics Engineering from Politeknik Negeri Cilacap (GPA 3.
 - Built chatbot systems HC-Analytics and HR-Assistant with real-time communication via Socket.io and state management with Zustand
 - Experienced deploying with Docker and PM2
 
-**JKB Learning Center by Himatris** — Frontend Mentor | April 2025
-- Taught new students web development fundamentals (HTML, CSS, JavaScript, basic ReactJS)
+**JKB Learning Center by Himatris** — Frontend Mentor | April 2025 – September 2026
+- Taught new students web development fundamentals (HTML, CSS, JavaScript, ReactJS)
 
 ### Education
 D3 Informatics Engineering — Politeknik Negeri Cilacap (2023–2026), GPA: 3.51
