@@ -273,7 +273,7 @@ const LandingPage = () => {
                         <div className='space-y-14'>
                             <RevealOnScroll delay={100}>
                                 <div className='relative'>
-                                    <span className='absolute -left-[31px] sm:-left-[39px] top-1.5 w-3 h-3 rounded-full bg-signal shadow-[0_0_12px_rgba(255,0,0,0.8)] animate-pulse'></span>
+                                    <span className='absolute -left-7 sm:-left-10 top-1.5 w-3 h-3 rounded-full bg-signal shadow-[0_0_12px_rgba(255,0,0,0.8)] animate-pulse ring-4 ring-white z-10'></span>
                                     <div className='font-mono text-[11px] text-signal uppercase font-bold mb-1 flex items-center gap-2'>
                                         <span>SEP 2026 — PRESENT</span>
                                         <span className='text-black/30'>// ACTIVE ROLE</span>
@@ -292,7 +292,7 @@ const LandingPage = () => {
 
                             <RevealOnScroll delay={200}>
                                 <div className='relative'>
-                                    <span className='absolute -left-[31px] sm:-left-[39px] top-1.5 w-3 h-3 rounded-full bg-black/40'></span>
+                                    <span className='absolute -left-7 sm:-left-10 top-1.5 w-3 h-3 rounded-full bg-black ring-4 ring-white z-10'></span>
                                     <div className='font-mono text-[11px] text-black/50 uppercase mb-1'>JUN 2026 — SEP 2026</div>
                                     <h3 className='text-2xl sm:text-3xl font-uncut font-bold uppercase'>
                                         Frontend Developer Intern
@@ -308,7 +308,7 @@ const LandingPage = () => {
 
                             <RevealOnScroll delay={300}>
                                 <div className='relative'>
-                                    <span className='absolute -left-[31px] sm:-left-[39px] top-1.5 w-3 h-3 rounded-full bg-black/40'></span>
+                                    <span className='absolute -left-7 sm:-left-10 top-1.5 w-3 h-3 rounded-full bg-black ring-4 ring-white z-10'></span>
                                     <div className='font-mono text-[11px] text-black/50 uppercase mb-1'>JUL 2025 — JAN 2026</div>
                                     <h3 className='text-2xl sm:text-3xl font-uncut font-bold uppercase'>
                                         Frontend Developer Intern

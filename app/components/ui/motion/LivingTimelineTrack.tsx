@@ -29,11 +29,11 @@ export function LivingTimelineTrack({ children }: { children: React.ReactNode })
     }, [])
 
     return (
-        <div ref={containerRef} className="relative pl-6 sm:pl-8">
-            <div className="absolute left-0 top-3 bottom-3 w-[1px] bg-black/15" />
+        <div ref={containerRef} className="relative pl-7 sm:pl-10">
+            <div className="absolute left-[5.5px] top-2 bottom-3 w-[1px] bg-black/15" />
             <div
                 style={{ height: `${lineHeight}%` }}
-                className="absolute left-0 top-3 w-[2px] bg-signal shadow-[0_0_8px_rgba(255,0,0,0.8)] transition-all duration-75 ease-out will-change-[height]"
+                className="absolute left-[5px] top-2 w-[2px] bg-signal shadow-[0_0_8px_rgba(255,0,0,0.8)] transition-all duration-75 ease-out will-change-[height]"
             />
             {children}
         </div>

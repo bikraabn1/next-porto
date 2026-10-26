@@ -32,9 +32,9 @@ const InputChat = ({ sendMessage, isLoading }: InputChatProps) => {
                 <button
                     type="submit"
                     disabled={!input.trim() || isLoading}
-                    className='font-mono text-[11px] font-bold uppercase px-4 py-1.5 bg-black text-white hover:bg-signal transition-colors disabled:opacity-20 disabled:cursor-not-allowed cursor-pointer'
+                    className='font-mono text-[11px] font-bold flex uppercase px-4 py-1.5 bg-black text-white hover:bg-signal transition-colors disabled:opacity-20 disabled:cursor-not-allowed cursor-pointer'
                 >
-                    ENTER &rarr;
+                    ENTER <span className='ml-1'>&rarr;</span>
                 </button>
             </form>
         </div>
