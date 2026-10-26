@@ -1,140 +1,69 @@
 "use client"
 
-import { useGSAP } from "@gsap/react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { useRef, useState } from "react"
-import { CgClose, CgMenu } from "react-icons/cg"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
-
-gsap.registerPlugin(ScrollTrigger)
-
-interface MenuProps {
-    label: string
-    href: string
-}
-
-const TopNav = ({ menus, topNavRef }: { menus: MenuProps[], topNavRef: React.RefObject<HTMLElement | null> }) => (
-    <nav ref={topNavRef} className="fixed top-[5vh] rounded-full left-1/2 -translate-x-1/2 flex gap-3 p-2 bg-surface/60 backdrop-blur-md z-50">
-        {menus.map((menu) => (
-            <Link
-                key={menu.href}
-                href={menu.href}
-                className="py-2 px-3 md:py-3 md:px-6 text-xs md:text-sm bg-linear-90 from-orange-600 to-orange-800 text-muted hover:scale-105 transition-all ease-in-out duration-150 cursor-pointer tracking-wider font-fira-code rounded-full"
-            >
-                {menu.label}
-            </Link>
-        ))}
-    </nav>
-)
-
-const SideNav = ({ menus, isSideNavOpen, setIsSideNavOpen, sideNavRef, isHome }: { 
-    menus: MenuProps[], 
-    isSideNavOpen: boolean, 
-    setIsSideNavOpen: (val: boolean) => void, 
-    sideNavRef?: React.RefObject<HTMLDivElement | null>,
-    isHome: boolean
-}) => {
-    const content = isSideNavOpen ? (
-        <nav className="absolute top-[5vh] z-20 flex flex-col bg-primary w-[94vw] h-[90vh] justify-center items-end rounded-3xl right-[3vw] pointer-events-auto">
-            <button aria-label="Navigation Humberger Button Close" className="text-foreground absolute top-8 right-8 cursor-pointer hover:scale-110 ease-in-out duration-150" onClick={() => setIsSideNavOpen(false)}>
-                <CgClose size={32} />
-            </button>
-            {menus.map((menu) => (
-                <Link
-                    key={menu.href}
-                    href={menu.href}
-                    onClick={() => setIsSideNavOpen(false)}
-                    className="py-3 px-6 text-foreground hover:scale-105 hover:font-semibold transition-all ease-in-out duration-150 cursor-pointer tracking-wider text-3xl font-fira-code rounded-full"
-                >
-                    {menu.label}
-                </Link>
-            ))}
-        </nav>
-    ) : (
-        <button aria-label="Navigation Humberger Button Open" className="absolute top-5 md:top-10 right-5 md:right-10 z-20 cursor-pointer bg-primary rounded-full p-2 lg:p-4 pointer-events-auto hover:scale-110 transition-transform" onClick={() => setIsSideNavOpen(true)}>
-            <CgMenu className="text-foreground text-lg lg:text-2xl" />
-        </button>
-    );
-
-    if (isHome) {
-        return (
-            <div ref={sideNavRef} className="fixed top-0 right-0 z-50 w-full h-full pointer-events-none">
-                {content}
-            </div>
-        )
-    }
-
-    return <div>{content}</div>
-}
+import { JakartaClock } from "../motion/JakartaClock"
 
 const Navigation = () => {
-    const menus: MenuProps[] = [
-        { label: 'Home', href: '/' },
-        { label: 'Projects', href: '/projects' },
-        { label: 'Jackson', href: '/jackson-bot' },
-        { label: 'Experience', href: '/experience' }
-    ]
-
-    const topNavRef = useRef<HTMLElement | null>(null)
-    const sideNavRef = useRef<HTMLDivElement | null>(null)
-    const [isSideNavOpen, setIsSideNavOpen] = useState<boolean>(false)
     const pathname = usePathname()
 
-    useGSAP(() => {
-        if (!topNavRef.current || !sideNavRef.current) return;
-
-        gsap.set(sideNavRef.current, { autoAlpha: 0, x: 50 })
-        gsap.set(topNavRef.current, { y: 0, autoAlpha: 1 })
-
-        const pageScroller = document.querySelector('#main-scroller') as HTMLElement | null
-
-        const navTrigger = ScrollTrigger.create({
-            start: 150,
-            ...(pageScroller ? { scroller: pageScroller } : {}),
-
-            onEnter: () => {
-                gsap.to(topNavRef.current, { y: -100, autoAlpha: 0, duration: 0.3 })
-                gsap.to(sideNavRef.current, { x: 0, autoAlpha: 1, duration: 0.4, ease: "back.out(1.5)" })
-            },
-
-            onLeaveBack: () => {
-                gsap.to(sideNavRef.current, { x: 50, autoAlpha: 0, duration: 0.3 })
-                gsap.to(topNavRef.current, { y: 0, autoAlpha: 1, duration: 0.4, ease: "power2.out" })
-                setIsSideNavOpen(false)
-            }
-        })
-
-        ScrollTrigger.refresh()
-
-        return () => {
-            navTrigger.kill()
-        }
-    }, { dependencies: [pathname], revertOnUpdate: true })
+    const menus = [
+        { label: 'Index', href: '/' },
+        { label: 'Projects', href: '/projects' },
+        { label: 'Timeline', href: '/experience' },
+        { label: 'Terminal', href: '/jackson-bot' }
+    ]
 
     return (
-        <>
-            {pathname === '/' ? (
-                <div>
-                    <SideNav
-                        menus={menus}
-                        isSideNavOpen={isSideNavOpen}
-                        setIsSideNavOpen={setIsSideNavOpen}
-                        sideNavRef={sideNavRef}
-                        isHome={true}
-                    />
-                    <TopNav menus={menus} topNavRef={topNavRef} />
-                </div>
-            ) : (
-                <SideNav
-                    menus={menus}
-                    isSideNavOpen={isSideNavOpen}
-                    setIsSideNavOpen={setIsSideNavOpen}
-                    isHome={false}
+        <header className="sticky top-0 z-50 w-full bg-background/90 backdrop-blur-md border-b border-black/5 flex items-center justify-between px-6 sm:px-12 py-4 font-mono text-[11px] select-none transition-all">
+            <Link
+                href="/"
+                className="flex items-center gap-2.5 font-uncut font-bold text-base tracking-tight text-black group"
+            >
+                <Image
+                    src="/logo-header.png"
+                    alt="Bikra Abna Logo"
+                    width={26}
+                    height={26}
+                    className="w-6.5 h-6.5 object-contain shrink-0 group-hover:scale-105 transition-transform"
+                    priority
                 />
-            )}
-        </>
+                <span>BIKRA ABNA</span>
+                <span className="hidden sm:inline text-black/30 font-mono text-[10px] font-normal">// STUDIO</span>
+            </Link>
+
+            <div className="flex items-center gap-8">
+                <div className="hidden md:flex items-center gap-3 text-black/60 text-[10px] tracking-wider uppercase">
+                    <span className="text-black/40">JAKARTA</span>
+                    <JakartaClock />
+                    <span className="text-black/30">|</span>
+                    <span className="text-black font-medium">AVAILABLE FOR WORK</span>
+                </div>
+
+                <nav className="flex items-center gap-6 sm:gap-8">
+                    {menus.map((menu) => {
+                        const isActive = pathname === menu.href
+                        return (
+                            <Link
+                                key={menu.href}
+                                href={menu.href}
+                                className={`relative py-1 tracking-tight transition-colors ${
+                                    isActive
+                                        ? 'text-black font-bold'
+                                        : 'text-black/60 hover:text-signal'
+                                }`}
+                            >
+                                {menu.label}
+                                {isActive && (
+                                    <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-signal" />
+                                )}
+                            </Link>
+                        )
+                    })}
+                </nav>
+            </div>
+        </header>
     )
 }
 

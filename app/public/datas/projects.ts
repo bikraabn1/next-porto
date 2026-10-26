@@ -3,11 +3,11 @@ import { Project } from "@/app/types";
 export const PROJECT_DATAS: Project[] = [
     {
         title: 'Bikra`s Web Portfolio',
-        description: 'A modern portfolio featuring Web3 visual aesthetics, glassmorphism UI, and smooth GSAP scroll animations to showcase my frontend engineering journey.',
-        imageLink: '/image/projects/porto.png',
-        techStack: ['Next.js', 'TypeScript', 'Tailwind', 'GSAP'],
+        description: 'An architectural engineering portfolio crafted on strict Swiss Editorial Design discipline, tactile scroll-driven narrative choreography, and real-time inference telemetry.',
+        imageLink: '/image/projects/porto-v2.png',
+        techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
         githubLink: 'https://github.com/bikraabn1/next-porto',
-        webLink: '#',
+        webLink: 'https://bikraabna.tech',
         isInternal: false
     },
     {

@@ -7,61 +7,114 @@ export default function ProjectsPage() {
     const projects = PROJECT_DATAS
 
     return (
-        <main id='main-scroller' className='h-screen overflow-y-auto bg-foreground text-background'>
-            <section className='relative mx-auto w-full max-w-6xl px-6 pb-20 pt-40 md:px-10'>
-
-                <div className='relative mb-10 flex flex-wrap items-end justify-between gap-4'>
-                    <div>
-                        <p className='mb-2 text-sm uppercase tracking-[0.2em] text-primary font-fira-code'>Portfolio Work</p>
-                        <h1 className='text-4xl md:text-5xl font-clash-display tracking-tight'>Projects</h1>
+        <main className='w-full min-h-screen bg-background text-foreground'>
+            <div className='px-6 sm:px-12 pt-20 pb-16 max-w-7xl mx-auto border-b border-black/10'>
+                <div className='flex items-center justify-between font-mono text-[11px] text-black/50 mb-8'>
+                    <div className='flex items-center gap-2'>
+                        <span className='text-signal font-bold'>[02]</span>
+                        <span>COMPLETE DELIVERABLES REPOSITORY</span>
                     </div>
-                    <Link href='/' className='rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm hover:bg-white/10 transition-colors'>
-                        Back to Home
+                    <Link
+                        href='/'
+                        className='font-mono text-xs font-bold text-black hover:text-signal transition-colors inline-flex items-center gap-1.5'
+                    >
+                        <span>&larr;</span>
+                        <span>RETURN TO INDEX</span>
                     </Link>
                 </div>
 
-                <div className='grid gap-6 md:grid-cols-2'>
-                    {projects.map((project) => (
-                        <article key={project.title} className='rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md transition-transform duration-300 hover:-translate-y-1'>
-                            <div className='mb-4 flex h-70 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-sm text-background/70'>
-                                <Image
-                                    src={project.imageLink}
-                                    alt={project.title}
-                                    height={500}
-                                    width={300}
-                                    className='w-full h-full object-cover rounded-xl opacity-80 hover:opacity-100 transition-opacity duration-300'
-                                />
+                <h1 className='text-4xl sm:text-7xl md:text-8xl font-uncut font-black uppercase tracking-tighter leading-none mb-6'>
+                    Projects Archive<span className='text-signal'>.</span>
+                </h1>
+                <p className='font-uncut text-lg sm:text-xl text-black/70 max-w-2xl font-normal'>
+                    A comprehensive catalog of production web systems, AI interfaces, internal tooling, and client deliverables.
+                </p>
+            </div>
+
+            <div className='w-full border-t border-dashed border-black/15 flex items-center justify-between px-6 sm:px-12 py-2.5 font-mono text-[10px] text-black/40 uppercase select-none'>
+                <span>// ARCHIVAL INDEX</span>
+                <span>[ ✂ ]</span>
+                <span>TOTAL: {projects.length} UNITS RECORDED</span>
+            </div>
+
+            <div className='max-w-7xl mx-auto px-6 sm:px-12 py-16 sm:py-24 space-y-24 sm:space-y-32'>
+                {projects.map((project, idx) => {
+                    const isEven = idx % 2 === 0
+                    return (
+                        <article
+                            key={project.title}
+                            className='grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-14 items-center pb-24 border-b border-black/10 last:border-b-0'
+                        >
+                            <div className={`lg:col-span-5 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
+                                <div className='flex items-center gap-3 font-mono text-[10px] text-black/50 uppercase mb-4'>
+                                    <span className='text-signal font-bold'>REF: 0{idx + 1}</span>
+                                    <span>//</span>
+                                    <span>{project.isInternal ? 'INTERNAL SYSTEM' : 'PUBLIC RELEASE'}</span>
+                                </div>
+
+                                <h2 className='text-3xl sm:text-5xl font-uncut font-black uppercase tracking-tight text-black mb-4'>
+                                    {project.title}
+                                </h2>
+
+                                <p className='font-uncut text-base sm:text-lg text-black/75 leading-relaxed mb-6 font-normal'>
+                                    {project.description}
+                                </p>
+
+                                <div className='flex flex-wrap gap-2 mb-8'>
+                                    {project.techStack.map((tech) => (
+                                        <span
+                                            key={tech}
+                                            className='font-mono text-[10px] px-2.5 py-1 bg-paper border border-black/10 text-black/80 uppercase'
+                                        >
+                                            {tech}
+                                        </span>
+                                    ))}
+                                </div>
+
+                                <div className='flex items-center gap-6 font-mono text-xs font-bold'>
+                                    {!project.isInternal && (
+                                        <a
+                                            href={project.githubLink}
+                                            target='_blank'
+                                            rel='noopener noreferrer'
+                                            className='inline-flex items-center gap-1.5 text-black hover:text-signal transition-colors'
+                                        >
+                                            <span>VIEW SOURCE</span>
+                                            <FaArrowUpRightFromSquare className='text-[10px]' />
+                                        </a>
+                                    )}
+                                    {project.webLink && (
+                                        <a
+                                            href={project.webLink}
+                                            target='_blank'
+                                            rel='noopener noreferrer'
+                                            className='inline-flex items-center gap-1.5 text-black hover:text-signal transition-colors'
+                                        >
+                                            <span>VISIT LIVE PAGE</span>
+                                            <FaArrowUpRightFromSquare className='text-[10px]' />
+                                        </a>
+                                    )}
+                                </div>
                             </div>
-                            <h3 className='mb-2 text-xl font-semibold'>{project.title}</h3>
-                            <p className='mb-4 text-sm leading-relaxed text-background/80'>{project.description}</p>
 
-                            <div className='mb-5 flex flex-wrap gap-2'>
-                                {project.techStack.map((tech) => (
-                                    <span key={`${project.title}-${tech}`} className='rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs text-primary'>
-                                        {tech}
-                                    </span>
-                                ))}
+                            <div className={`lg:col-span-7 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
+                                <div className='group relative w-full aspect-16/10 bg-paper overflow-hidden border border-black/10'>
+                                    <div className='absolute top-3 left-3 z-10 px-2.5 py-1 bg-black/80 backdrop-blur-md text-white font-mono text-[9px] uppercase tracking-wider'>
+                                        ARCHIVE_FIG // 0{idx + 1}
+                                    </div>
+                                    <Image
+                                        src={project.imageLink}
+                                        alt={project.title}
+                                        width={1000}
+                                        height={650}
+                                        className='w-full h-full object-cover grayscale contrast-115 opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500'
+                                    />
+                                </div>
                             </div>
-
-                            {
-                                !project.isInternal && <a href={project.githubLink} className='inline-flex items-center gap-2 rounded-lg border border-white/15 px-3 py-2 text-sm hover:bg-white/10 transition-colors'>
-                                    <FaGithub />
-                                    View Source
-                                    <FaArrowUpRightFromSquare className='text-xs' />
-                                </a>
-                            }
-
-                            {
-                                project.webLink && <a href={project.webLink} className='inline-flex items-center gap-2 rounded-lg border border-white/15 px-3 py-2 text-sm hover:bg-white/10 transition-colors'>
-                                    <FaGlobe />
-                                    View Page
-                                    <FaArrowUpRightFromSquare className='text-xs' />
-                                </a>
-                            }
                         </article>
-                    ))}
-                </div>
-            </section>
+                    )
+                })}
+            </div>
         </main>
     )
 }

@@ -1,6 +1,17 @@
 export const EXPERIENCE_DATAS = [
     {
-        period: 'June 2026 - Present',
+        period: 'September 2026 - Present',
+        role: 'Fullstack Developer Intern',
+        company: 'PT Tiga Serangkai Pustaka Mandiri',
+        highlights: [
+            'Building end-to-end web features across frontend and backend services for educational publishing ecosystems.',
+            'Collaborating on fullstack system design, database integration, and high-reliability API development.',
+            'Developing maintainable components and streamlining workflows across departmental platforms.'
+        ],
+        stack: ['Fullstack', 'JavaScript', 'TypeScript', 'Node.js', 'React.js', 'PostgreSQL', 'Git'],
+    },
+    {
+        period: 'June 2026 - September 2026',
         role: 'Frontend Developer Intern',
         company: 'PT Adma Digital Solusi',
         highlights: [
@@ -27,16 +38,15 @@ export const EXPERIENCE_DATAS = [
         role: 'Frontend Developer Intern',
         company: 'PT Wiratek Solusi Asia',
         highlights: [
-            'Developed responsive UI components using React and Next.js.',
-            'Integrated backend APIs into frontend features and handled basic state management.',
-            'Deployed frontend applications using Docker and managed processes with PM2.',
-            'Adapted quickly to different UI libraries and design systems based on project needs.',
+            'Engineered real-time chatbot interactions utilizing Socket.io for internal PLN applications (PLN-IG).',
+            'Integrated Apache Superset data visualization dashboards into web applications (PLN-NP).',
+            'Developed responsive UI components using React and Next.js, deploying with Docker and PM2.',
             'Ensured consistent layout and usability across mobile and desktop devices.',
         ],
-        stack: ['React.js', 'Next.js', 'Docker', 'PM2', 'Git'],
+        stack: ['React.js', 'Next.js', 'Socket.io', 'Docker', 'PM2', 'Git'],
     },
     {
-        period: 'April 2025',
+        period: 'April 2025 - September 2026',
         role: 'Frontend Mentor',
         company: 'JKB Learning Center by HIMATRIS',
         highlights: [
