@@ -6,5 +6,20 @@ export const CERTIFICATION_DATAS: Certification[] = [
     { name: 'Belajar Membuat Aplikasi Web dengan React', url: 'https://www.dicoding.com/certificates/07Z60N9OMZQR' },
     { name: 'Belajar Dasar Pemrograman Web', url: 'https://www.dicoding.com/certificates/N9ZOO2Q16ZG5' },
     { name: 'Belajar Membuat Front-End Web untuk Pemula', url: 'https://www.dicoding.com/certificates/0LZ02WN0KX65' },
-
 ]
+
+const CMS_URL = process.env.CMS_URL || process.env.NEXT_PUBLIC_CMS_URL || "http://localhost:5173"
+
+export async function getCertifications(): Promise<Certification[]> {
+    try {
+        const res = await fetch(`${CMS_URL}/api/certifications`, {
+            next: { revalidate: 60 },
+        })
+        if (!res.ok) throw new Error(`CMS status ${res.status}`)
+        const data = await res.json()
+        return Array.isArray(data) && data.length > 0 ? data : CERTIFICATION_DATAS
+    } catch {
+        // shortcut: offline fallback during development or CMS outage
+        return CERTIFICATION_DATAS
+    }
+}

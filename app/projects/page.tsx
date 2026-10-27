@@ -1,10 +1,10 @@
 import Link from 'next/link'
-import { FaArrowUpRightFromSquare, FaGithub, FaGlobe } from 'react-icons/fa6'
-import { PROJECT_DATAS } from '../public/datas/projects'
+import { FaArrowUpRightFromSquare } from 'react-icons/fa6'
+import { getProjects } from '../public/datas/projects'
 import Image from 'next/image'
 
-export default function ProjectsPage() {
-    const projects = PROJECT_DATAS
+export default async function ProjectsPage() {
+    const projects = await getProjects()
 
     return (
         <main className='w-full min-h-screen bg-background text-foreground'>

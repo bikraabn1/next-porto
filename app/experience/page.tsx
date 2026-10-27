@@ -1,8 +1,13 @@
 import Link from 'next/link'
-import { EXPERIENCE_DATAS } from '../public/datas/experiences'
+import { getExperiences } from '../public/datas/experiences'
+import { getCertifications } from '../public/datas/certification'
+import { FaArrowUpRightFromSquare } from 'react-icons/fa6'
 
-export default function ExperiencePage() {
-    const experiences = EXPERIENCE_DATAS
+export default async function ExperiencePage() {
+    const [experiences, certifications] = await Promise.all([
+        getExperiences(),
+        getCertifications(),
+    ])
 
     return (
         <main className='w-full min-h-screen bg-background text-foreground'>
@@ -80,6 +85,48 @@ export default function ExperiencePage() {
                         </div>
                     </article>
                 ))}
+
+                {certifications.length > 0 && (
+                    <section className='pt-16 border-t-2 border-black'>
+                        <div className='flex items-center justify-between mb-8'>
+                            <div className='font-mono text-xs uppercase tracking-wider font-bold text-black flex items-center gap-2'>
+                                <span className='text-signal font-bold'>[04]</span>
+                                <span>ACCREDITED CREDENTIALS & CERTIFICATIONS</span>
+                            </div>
+                            <span className='font-mono text-[10px] text-black/40 uppercase'>
+                                VERIFIED ISSUANCES ({certifications.length})
+                            </span>
+                        </div>
+
+                        <div className='divide-y divide-black/10 border-y border-black/10'>
+                            {certifications.map((cert, idx) => (
+                                <div
+                                    key={cert.name}
+                                    className='py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 group hover:bg-black/[0.02] transition-colors px-2'
+                                >
+                                    <div className='flex items-center gap-4'>
+                                        <span className='font-mono text-xs text-signal font-bold select-none'>
+                                            {String(idx + 1).padStart(2, '0')}.
+                                        </span>
+                                        <span className='font-uncut text-base sm:text-lg font-bold text-black group-hover:text-signal transition-colors'>
+                                            {cert.name}
+                                        </span>
+                                    </div>
+
+                                    <a
+                                        href={cert.url}
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                        className='font-mono text-xs font-bold text-black/60 group-hover:text-signal inline-flex items-center gap-1.5 transition-colors self-start sm:self-center'
+                                    >
+                                        <span>VERIFY CREDENTIAL</span>
+                                        <FaArrowUpRightFromSquare className='text-[10px]' />
+                                    </a>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
             </div>
         </main>
     )

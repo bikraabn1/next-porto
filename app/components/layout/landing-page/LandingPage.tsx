@@ -1,6 +1,10 @@
 'use client'
 
+import React from 'react'
+import { Project } from '@/app/types'
 import { PROJECT_DATAS } from '@/app/public/datas/projects'
+import { EXPERIENCE_DATAS, ExperienceItem } from '@/app/public/datas/experiences'
+import { HomePageSettings, CapabilityGroup } from '@/app/public/datas/pages'
 import { RevealOnScroll } from '@/app/components/ui/motion/RevealOnScroll'
 import { ScrollProgressSpine } from '@/app/components/ui/motion/ScrollProgressSpine'
 import { TextScramble } from '@/app/components/ui/motion/TextScramble'
@@ -14,72 +18,96 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FaArrowUpRightFromSquare } from 'react-icons/fa6'
 
-const LandingPage = () => {
-    const projects = PROJECT_DATAS
+interface LandingPageProps {
+    initialProjects?: Project[]
+    pageSettings?: HomePageSettings
+    experiences?: ExperienceItem[]
+    capabilities?: CapabilityGroup[]
+}
 
-    const featureProjects = projects.slice(0, 2)
-    const secondaryProjects = projects.slice(2, 6)
+const LandingPage = ({
+    initialProjects,
+    pageSettings,
+    experiences,
+    capabilities,
+}: LandingPageProps = {}) => {
+    const projects = initialProjects && initialProjects.length > 0 ? initialProjects : PROJECT_DATAS
+    const headline = pageSettings?.headline || "Fullstack Developer crafting high-grade web applications, reactive architectures, and real-time interfaces"
+    const availabilityStatus = pageSettings?.availabilityStatus || "OPEN FOR ENGAGEMENTS"
+    const bio = pageSettings?.bio || "Currently operating as Fullstack Developer Intern at PT Tiga Serangkai Pustaka Mandiri — previously engineered production AI summaries and responsive systems at PT Adma Digital Solusi and real-time chatbots for PLN at PT Wiratek Solusi Asia."
+    const resumeUrl = pageSettings?.resumeUrl || "/bikraabna.pdf"
+    const marqueeText = pageSettings?.telemetryMarquee || "CHRONOLOGY // CAREER TRAJECTORY // PRODUCTION COMMITS // ARCHIVE VERIFICATION"
 
-    return (
-        <main className='w-full min-h-screen bg-background text-foreground relative'>
-            <TicketOpening />
+    const starred = projects.filter((p) => p.featured)
+    const featureProjects = starred.length > 0 ? starred.slice(0, 2) : projects.slice(0, 2)
+    const secondaryProjects = projects
+        .filter((p) => !featureProjects.some((fp) => fp.title === p.title))
+        .slice(0, 4)
 
-            <ScrollProgressSpine />
+    const timelineList = (experiences && experiences.length > 0 ? experiences : EXPERIENCE_DATAS).slice(0, 3)
 
-            <section className='px-6 sm:px-12 pt-16 sm:pt-24 pb-20 sm:pb-28 max-w-7xl mx-auto'>
-                <RevealOnScroll delay={0}>
-                    <div className='flex items-center justify-between font-mono text-[11px] text-black/50 mb-12 sm:mb-16'>
-                        <div className='flex items-center gap-2'>
-                            <span className='text-signal font-bold'>[01]</span>
-                            <TextScramble text="STATEMENT OF CRAFT" delay={200} />
+    const sectionOrder = pageSettings?.sectionOrder && pageSettings.sectionOrder.length > 0
+        ? pageSettings.sectionOrder
+        : ["hero", "deliverables", "matrix", "timeline"]
+
+    const renderHero = () => (
+        <section key="hero" className='px-6 sm:px-12 pt-16 sm:pt-24 pb-20 sm:pb-28 max-w-7xl mx-auto'>
+            <RevealOnScroll delay={0}>
+                <div className='flex items-center justify-between font-mono text-[11px] text-black/50 mb-12 sm:mb-16'>
+                    <div className='flex items-center gap-2'>
+                        <span className='text-signal font-bold'>[01]</span>
+                        <TextScramble text="STATEMENT OF CRAFT" delay={200} />
+                    </div>
+                    <div className='flex items-center gap-2 text-black/80'>
+                        <span className='uppercase font-medium'>{availabilityStatus}</span>
+                    </div>
+                </div>
+            </RevealOnScroll>
+
+            <div className='my-8 sm:my-12'>
+                <ScrollHorizontalName />
+            </div>
+
+            <div className='max-w-5xl'>
+                <RevealOnScroll delay={100}>
+                    <h1 className='text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-uncut font-black uppercase tracking-tighter leading-[0.92] text-black mb-10'>
+                        {headline.replace(/\.$/, '')}<span className='text-signal animate-pulse'>.</span>
+                    </h1>
+                </RevealOnScroll>
+
+                <RevealOnScroll delay={200}>
+                    <div className='grid grid-cols-1 md:grid-cols-12 gap-8 pt-8 border-t border-black/10 items-baseline'>
+                        <div className='md:col-span-8'>
+                            <p className='font-uncut text-lg sm:text-xl md:text-2xl text-black/80 font-normal leading-relaxed'>
+                                {bio}
+                            </p>
                         </div>
-                        <div className='flex items-center gap-2 text-black/80'>
-                            <span className='uppercase font-medium'>OPEN FOR ENGAGEMENTS</span>
+                        <div className='md:col-span-4 flex flex-col items-start md:items-end gap-3 font-mono text-xs font-bold'>
+                            <a
+                                href={resumeUrl}
+                                download='Bikra_Abna_CV.pdf'
+                                className='inline-flex items-center gap-2 text-black hover:text-signal transition-colors group'
+                            >
+                                <span>DOWNLOAD RESUME [PDF]</span>
+                                <span className='text-signal group-hover:translate-x-1 transition-transform'>&rarr;</span>
+                            </a>
+                            <Link
+                                href='/experience'
+                                className='inline-flex items-center gap-2 text-black/60 hover:text-black transition-colors group'
+                            >
+                                <span>VIEW EMPLOYMENT RECORD</span>
+                                <span className='group-hover:translate-x-1 transition-transform'>&rarr;</span>
+                            </Link>
                         </div>
                     </div>
                 </RevealOnScroll>
+            </div>
+        </section>
+    )
 
-                <div className='my-8 sm:my-12'>
-                    <ScrollHorizontalName />
-                </div>
-
-                <div className='max-w-5xl'>
-                    <RevealOnScroll delay={100}>
-                        <h1 className='text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-uncut font-black uppercase tracking-tighter leading-[0.92] text-black mb-10'>
-                            Fullstack Developer crafting high-grade web applications, reactive architectures, and real-time interfaces<span className='text-signal animate-pulse'>.</span>
-                        </h1>
-                    </RevealOnScroll>
-
-                    <RevealOnScroll delay={200}>
-                        <div className='grid grid-cols-1 md:grid-cols-12 gap-8 pt-8 border-t border-black/10 items-baseline'>
-                            <div className='md:col-span-8'>
-                                <p className='font-uncut text-lg sm:text-xl md:text-2xl text-black/80 font-normal leading-relaxed'>
-                                    Currently operating as Fullstack Developer Intern at <strong>PT Tiga Serangkai Pustaka Mandiri</strong> — previously engineered production AI summaries and responsive systems at <strong>PT Adma Digital Solusi</strong> and real-time chatbots for PLN at <strong>PT Wiratek Solusi Asia</strong>.
-                                </p>
-                            </div>
-                            <div className='md:col-span-4 flex flex-col items-start md:items-end gap-3 font-mono text-xs font-bold'>
-                                <a
-                                    href='/bikraabna.pdf'
-                                    download='Bikra_Abna_CV.pdf'
-                                    className='inline-flex items-center gap-2 text-black hover:text-signal transition-colors group'
-                                >
-                                    <span>DOWNLOAD RESUME [PDF]</span>
-                                    <span className='text-signal group-hover:translate-x-1 transition-transform'>&rarr;</span>
-                                </a>
-                                <Link
-                                    href='/experience'
-                                    className='inline-flex items-center gap-2 text-black/60 hover:text-black transition-colors group'
-                                >
-                                    <span>VIEW EMPLOYMENT RECORD</span>
-                                    <span className='group-hover:translate-x-1 transition-transform'>&rarr;</span>
-                                </Link>
-                            </div>
-                        </div>
-                    </RevealOnScroll>
-                </div>
-            </section>
-
-            <TelemetryMarquee text="TRANSITION // SECTION 02 DELIVERABLES // LAT: -6.2088 // LON: 106.8456 // ARCHIVE PRODUCTION DEPLOYMENTS" />
+    const renderDeliverables = () => (
+        <React.Fragment key="deliverables">
+            <TelemetryMarquee text={marqueeText} />
 
             <section className='px-6 sm:px-12 py-20 sm:py-28 max-w-7xl mx-auto'>
                 <RevealOnScroll>
@@ -115,7 +143,7 @@ const LandingPage = () => {
                                             <span>{project.isInternal ? 'INTERNAL ARCHIVE' : 'PRODUCTION WORK'}</span>
                                         </div>
 
-                                        <h3 className='text-3xl sm:text-5xl font-uncut font-black uppercase tracking-tight text-black mb-4'>
+                                        <h3 className='text-3xl sm:text-5xl font-uncut font-black uppercase tracking-tight mb-4 text-black'>
                                             {project.title}
                                         </h3>
 
@@ -135,7 +163,7 @@ const LandingPage = () => {
                                         </div>
 
                                         <div className='flex items-center gap-6 font-mono text-xs font-bold'>
-                                            {!project.isInternal && (
+                                            {project.githubLink && project.githubLink !== '#' && (
                                                 <a
                                                     href={project.githubLink}
                                                     target='_blank'
@@ -143,10 +171,10 @@ const LandingPage = () => {
                                                     className='inline-flex items-center gap-1.5 text-black hover:text-signal transition-colors'
                                                 >
                                                     <span>SOURCE</span>
-                                                    <FaArrowUpRightFromSquare className='text-[10px]' />
+                                                    <span className='text-signal'>&rarr;</span>
                                                 </a>
                                             )}
-                                            {project.webLink && (
+                                            {project.webLink ? (
                                                 <a
                                                     href={project.webLink}
                                                     target='_blank'
@@ -156,6 +184,8 @@ const LandingPage = () => {
                                                     <span>LIVE PREVIEW</span>
                                                     <FaArrowUpRightFromSquare className='text-[10px]' />
                                                 </a>
+                                            ) : (
+                                                <span className='text-black/40'>INTERNAL CONFIDENTIAL</span>
                                             )}
                                         </div>
                                     </div>
@@ -181,47 +211,46 @@ const LandingPage = () => {
                     })}
                 </div>
 
-                <div className='border-t border-black/15 pt-12'>
-                    <div className='font-mono text-[10px] uppercase tracking-wider text-black/50 mb-8 flex items-center justify-between'>
-                        <span>SECONDARY CATALOG</span>
-                        <span>[ EXHIBITION_LOG.MD ]</span>
+                <div className='pt-12 border-t border-black/10'>
+                    <div className='font-mono text-[10px] text-black/50 uppercase mb-6 flex items-center justify-between'>
+                        <span>SECONDARY CATALOG INDEX</span>
+                        <span>[ ✂ ]</span>
+                        <span>PRODUCTION SHIPPED</span>
                     </div>
 
-                    <div className='divide-y divide-black/10'>
+                    <div className='divide-y divide-black/10 border-y border-black/10'>
                         {secondaryProjects.map((project, idx) => (
-                            <RevealOnScroll key={project.title} delay={idx * 80}>
-                                <div className='py-6 sm:py-8 grid grid-cols-1 md:grid-cols-12 gap-4 items-baseline group hover:bg-paper transition-colors px-2 sm:px-4'>
+                            <RevealOnScroll key={project.title} delay={idx * 50}>
+                                <div className='py-5 sm:py-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center group hover:bg-black/[0.02] transition-colors px-2'>
                                     <div className='md:col-span-1 font-mono text-xs text-signal font-bold'>
-                                        0{idx + 3}.
+                                        0{idx + 3} //
                                     </div>
-                                    <div className='md:col-span-4'>
-                                        <h4 className='text-2xl sm:text-3xl font-uncut font-bold uppercase group-hover:text-signal transition-colors'>
-                                            {project.title}
-                                        </h4>
+
+                                    <div className='md:col-span-5 font-uncut font-bold text-lg sm:text-xl text-black group-hover:text-signal transition-colors uppercase'>
+                                        {project.title}
                                     </div>
-                                    <div className='md:col-span-5 font-uncut text-sm text-black/70'>
-                                        {project.description}
+
+                                    <div className='md:col-span-4 flex flex-wrap gap-1.5'>
+                                        {project.techStack.slice(0, 3).map((tech) => (
+                                            <span
+                                                key={tech}
+                                                className='font-mono text-[9px] px-2 py-0.5 border border-black/10 text-black/60 uppercase'
+                                            >
+                                                {tech}
+                                            </span>
+                                        ))}
                                     </div>
-                                    <div className='md:col-span-2 flex items-center md:justify-end gap-3 font-mono text-xs font-bold'>
+
+                                    <div className='md:col-span-2 flex justify-start md:justify-end font-mono text-xs font-bold'>
                                         {project.webLink ? (
                                             <a
                                                 href={project.webLink}
                                                 target='_blank'
                                                 rel='noopener noreferrer'
-                                                className='inline-flex items-center gap-1 text-black hover:text-signal transition-colors'
+                                                className='inline-flex items-center gap-1.5 text-black hover:text-signal transition-colors'
                                             >
-                                                <span>VISIT</span>
-                                                <span className='text-signal'>&rarr;</span>
-                                            </a>
-                                        ) : !project.isInternal ? (
-                                            <a
-                                                href={project.githubLink}
-                                                target='_blank'
-                                                rel='noopener noreferrer'
-                                                className='inline-flex items-center gap-1 text-black hover:text-signal transition-colors'
-                                            >
-                                                <span>REPO</span>
-                                                <span className='text-signal'>&rarr;</span>
+                                                <span>LIVE</span>
+                                                <FaArrowUpRightFromSquare className='text-[10px]' />
                                             </a>
                                         ) : (
                                             <span className='text-black/40'>INTERNAL</span>
@@ -233,7 +262,11 @@ const LandingPage = () => {
                     </div>
                 </div>
             </section>
+        </React.Fragment>
+    )
 
+    const renderMatrix = () => (
+        <React.Fragment key="matrix">
             <TelemetryMarquee text="SYSTEM BENCHMARK // CAPABILITIES MATRIX // REACT 19 // NEXT.JS TURBOPACK // STRICT TYPE-SAFETY" />
 
             <section className='px-6 sm:px-12 py-20 sm:py-28 max-w-7xl mx-auto'>
@@ -253,9 +286,13 @@ const LandingPage = () => {
                     </div>
                 </RevealOnScroll>
 
-                <CapabilitiesAccordion />
+                <CapabilitiesAccordion groups={capabilities} />
             </section>
+        </React.Fragment>
+    )
 
+    const renderTimeline = () => (
+        <React.Fragment key="timeline">
             <TelemetryMarquee text="CHRONOLOGY // CAREER TRAJECTORY // PRODUCTION COMMITS // ARCHIVE VERIFICATION" />
 
             <section className='px-6 sm:px-12 py-20 sm:py-28 max-w-7xl mx-auto'>
@@ -271,60 +308,61 @@ const LandingPage = () => {
 
                     <LivingTimelineTrack>
                         <div className='space-y-14'>
-                            <RevealOnScroll delay={100}>
-                                <div className='relative'>
-                                    <span className='absolute -left-7 sm:-left-10 top-1.5 w-3 h-3 rounded-full bg-signal shadow-[0_0_12px_rgba(255,0,0,0.8)] animate-pulse ring-4 ring-white z-10'></span>
-                                    <div className='font-mono text-[11px] text-signal uppercase font-bold mb-1 flex items-center gap-2'>
-                                        <span>SEP 2026 — PRESENT</span>
-                                        <span className='text-black/30'>// ACTIVE ROLE</span>
-                                    </div>
-                                    <h3 className='text-2xl sm:text-3xl font-uncut font-bold uppercase'>
-                                        Fullstack Developer Intern
-                                    </h3>
-                                    <div className='font-mono text-xs text-black/80 font-bold mb-3'>
-                                        PT Tiga Serangkai Pustaka Mandiri
-                                    </div>
-                                    <p className='font-uncut text-sm sm:text-base text-black/75 leading-relaxed'>
-                                        Developing end-to-end web features, database services, and workflow tools across educational publishing platforms.
-                                    </p>
-                                </div>
-                            </RevealOnScroll>
+                            {timelineList.map((exp, idx) => {
+                                const isFirst = idx === 0
+                                return (
+                                    <RevealOnScroll key={`${exp.company}-${exp.period}`} delay={(idx + 1) * 100}>
+                                        <div className='relative'>
+                                            {isFirst ? (
+                                                <span className='absolute -left-7 sm:-left-10 top-1.5 w-3 h-3 rounded-full bg-signal shadow-[0_0_12px_rgba(255,0,0,0.8)] animate-pulse ring-4 ring-white z-10'></span>
+                                            ) : (
+                                                <span className='absolute -left-7 sm:-left-10 top-1.5 w-3 h-3 rounded-full bg-black ring-4 ring-white z-10'></span>
+                                            )}
 
-                            <RevealOnScroll delay={200}>
-                                <div className='relative'>
-                                    <span className='absolute -left-7 sm:-left-10 top-1.5 w-3 h-3 rounded-full bg-black ring-4 ring-white z-10'></span>
-                                    <div className='font-mono text-[11px] text-black/50 uppercase mb-1'>JUN 2026 — SEP 2026</div>
-                                    <h3 className='text-2xl sm:text-3xl font-uncut font-bold uppercase'>
-                                        Frontend Developer Intern
-                                    </h3>
-                                    <div className='font-mono text-xs text-black/70 font-bold mb-3'>
-                                        PT Adma Digital Solusi
-                                    </div>
-                                    <p className='font-uncut text-sm sm:text-base text-black/75 leading-relaxed'>
-                                        Engineering core modules across production web applications: real-time streaming summaries, unit test coverage, and high-performance component architecture.
-                                    </p>
-                                </div>
-                            </RevealOnScroll>
+                                            <div className={`font-mono text-[11px] uppercase mb-1 flex items-center gap-2 ${isFirst ? 'text-signal font-bold' : 'text-black/50'}`}>
+                                                <span>{exp.period}</span>
+                                                {isFirst && <span className='text-black/30'>// ACTIVE ROLE</span>}
+                                            </div>
 
-                            <RevealOnScroll delay={300}>
-                                <div className='relative'>
-                                    <span className='absolute -left-7 sm:-left-10 top-1.5 w-3 h-3 rounded-full bg-black ring-4 ring-white z-10'></span>
-                                    <div className='font-mono text-[11px] text-black/50 uppercase mb-1'>JUL 2025 — JAN 2026</div>
-                                    <h3 className='text-2xl sm:text-3xl font-uncut font-bold uppercase'>
-                                        Frontend Developer Intern
-                                    </h3>
-                                    <div className='font-mono text-xs text-black/70 font-bold mb-3'>
-                                        PT Wiratek Solusi Asia
-                                    </div>
-                                    <p className='font-uncut text-sm sm:text-base text-black/75 leading-relaxed'>
-                                        Engineered real-time PLN chatbot modules (Socket.io) and integrated Apache Superset analytics dashboards.
-                                    </p>
-                                </div>
-                            </RevealOnScroll>
+                                            <h3 className='text-2xl sm:text-3xl font-uncut font-bold uppercase text-black'>
+                                                {exp.role}
+                                            </h3>
+
+                                            <div className='font-mono text-xs text-black/80 font-bold mb-3'>
+                                                {exp.company}
+                                            </div>
+
+                                            <p className='font-uncut text-sm sm:text-base text-black/75 leading-relaxed'>
+                                                {exp.highlights[0] || ''}
+                                            </p>
+                                        </div>
+                                    </RevealOnScroll>
+                                )
+                            })}
                         </div>
                     </LivingTimelineTrack>
                 </div>
             </section>
+        </React.Fragment>
+    )
+
+    const sectionsMap: Record<string, () => React.ReactNode> = {
+        hero: renderHero,
+        deliverables: renderDeliverables,
+        matrix: renderMatrix,
+        timeline: renderTimeline,
+    }
+
+    return (
+        <main className='w-full min-h-screen bg-background text-foreground relative'>
+            <TicketOpening />
+
+            <ScrollProgressSpine />
+
+            {sectionOrder.map((secId) => {
+                const renderer = sectionsMap[secId]
+                return renderer ? renderer() : null
+            })}
 
             <footer className='border-t border-black/10 px-6 sm:px-12 py-12 sm:py-16 bg-background font-mono text-xs text-black/70'>
                 <div className='max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-8'>

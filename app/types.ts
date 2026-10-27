@@ -9,6 +9,8 @@ export type Project = {
     githubLink?: string
     webLink?: string
     isInternal: boolean
+    featured?: boolean
+    order?: number
 }
 
 export type TechStack = { 

@@ -6,6 +6,7 @@ import { RevealOnScroll } from './RevealOnScroll'
 interface SkillItem {
     name: string
     detail: string
+    icon?: string
 }
 
 interface CapabilityGroup {
@@ -83,7 +84,8 @@ const CAPABILITY_GROUPS: CapabilityGroup[] = [
     }
 ]
 
-export function CapabilitiesAccordion() {
+export function CapabilitiesAccordion({ groups }: { groups?: CapabilityGroup[] } = {}) {
+    const list = groups && groups.length > 0 ? groups : CAPABILITY_GROUPS
     const [openKey, setOpenKey] = useState<string | null>(null)
 
     const toggle = (key: string) => {
@@ -92,7 +94,7 @@ export function CapabilitiesAccordion() {
 
     return (
         <div className='grid grid-cols-1 md:grid-cols-3 gap-12 sm:gap-16'>
-            {CAPABILITY_GROUPS.map((group, groupIdx) => (
+            {list.map((group, groupIdx) => (
                 <RevealOnScroll key={group.title} delay={groupIdx * 100}>
                     <div>
                         <div className='font-mono text-xs uppercase tracking-wider font-bold pb-3 border-b-2 border-black mb-6 text-black flex items-center justify-between'>
@@ -113,9 +115,16 @@ export function CapabilitiesAccordion() {
                                             onClick={() => toggle(key)}
                                             className='w-full text-left flex items-center justify-between gap-3 group cursor-pointer'
                                         >
-                                            <span className='font-bold text-sm font-uncut text-black group-hover:text-signal transition-colors'>
-                                                {skill.name}
-                                            </span>
+                                            <div className='flex items-center gap-2'>
+                                                <span className='font-mono text-[9px] font-bold text-signal px-1 py-0.5 border border-black/10 bg-paper uppercase select-none'>
+                                                    {skill.icon && skill.icon !== 'auto'
+                                                        ? skill.icon.slice(0, 2).toUpperCase()
+                                                        : (skill.name.replace(/[^a-zA-Z]/g, '').slice(0, 2).toUpperCase() || 'SK')}
+                                                </span>
+                                                <span className='font-bold text-sm font-uncut text-black group-hover:text-signal transition-colors'>
+                                                    {skill.name}
+                                                </span>
+                                            </div>
                                             <span
                                                 className={`text-xs font-mono font-bold px-1.5 py-0.5 border border-black/15 transition-all ${
                                                     isOpen

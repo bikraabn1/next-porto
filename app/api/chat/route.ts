@@ -90,6 +90,20 @@ export const POST = async (req: Request) => {
 
         const modelMessages = await convertToModelMessages(messages)
 
+        let dynamicSystemPrompt = SYSTEM_PROMPT
+        try {
+            const CMS_URL = process.env.CMS_URL || process.env.NEXT_PUBLIC_CMS_URL || "http://localhost:5173"
+            const cmsRes = await fetch(`${CMS_URL}/api/pages/jackson_bot`, {
+                next: { revalidate: 60 },
+            })
+            if (cmsRes.ok) {
+                const botData = await cmsRes.json()
+                if (botData?.systemPrompt) dynamicSystemPrompt = botData.systemPrompt
+            }
+        } catch {
+            // fallback to hardcoded SYSTEM_PROMPT
+        }
+
         return createUIMessageStreamResponse({
             status: 200,
             statusText: 'OK',
@@ -99,7 +113,7 @@ export const POST = async (req: Request) => {
 
                     const result = streamText({
                         model: gemini('models/gemini-flash-lite-latest'),
-                        system: SYSTEM_PROMPT,
+                        system: dynamicSystemPrompt,
                         messages: modelMessages,
                     })
 
