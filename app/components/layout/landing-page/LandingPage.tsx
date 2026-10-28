@@ -9,7 +9,7 @@ import { RevealOnScroll } from '@/app/components/ui/motion/RevealOnScroll'
 import { ScrollProgressSpine } from '@/app/components/ui/motion/ScrollProgressSpine'
 import { TextScramble } from '@/app/components/ui/motion/TextScramble'
 import { TicketOpening } from '@/app/components/ui/motion/TicketOpening'
-import { ParallaxRevealFrame } from '@/app/components/ui/motion/ParallaxRevealFrame'
+import { ProjectArtifactFrame } from '@/app/components/ui/motion/ProjectArtifactFrame'
 import { LivingTimelineTrack } from '@/app/components/ui/motion/LivingTimelineTrack'
 import { TelemetryMarquee } from '@/app/components/ui/motion/TelemetryMarquee'
 import { ScrollHorizontalName } from '@/app/components/ui/motion/ScrollHorizontalName'
@@ -191,19 +191,18 @@ const LandingPage = ({
                                     </div>
 
                                     <div className={`lg:col-span-7 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
-                                        <ParallaxRevealFrame className='relative w-full aspect-16/10 bg-paper border border-black/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] group'>
-                                            <div className='absolute top-3 left-3 z-10 px-2.5 py-1 bg-black/80 backdrop-blur-md text-white font-mono text-[9px] uppercase tracking-wider flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
-                                                <span className='w-1.5 h-1.5 rounded-full bg-signal animate-pulse'></span>
-                                                <span>FIG 0{idx + 1} // ARTIFACT REVEAL</span>
-                                            </div>
+                                        <ProjectArtifactFrame
+                                            badgeText={`FIG 0${idx + 1} // ARTIFACT REVEAL`}
+                                            className='w-full aspect-16/10 bg-paper border border-black/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)]'
+                                        >
                                             <Image
                                                 src={project.imageLink}
                                                 alt={project.title}
                                                 width={1000}
                                                 height={650}
-                                                className='w-full h-full object-cover grayscale contrast-115 opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 ease-out'
+                                                className='w-full h-full object-cover'
                                             />
-                                        </ParallaxRevealFrame>
+                                        </ProjectArtifactFrame>
                                     </div>
                                 </article>
                             </RevealOnScroll>

@@ -22,7 +22,8 @@ export function RevealOnScroll({
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setIsVisible(true)
-                    observer.unobserve(element)
+                } else if (entry.boundingClientRect.top > window.innerHeight) {
+                    setIsVisible(false)
                 }
             },
             {

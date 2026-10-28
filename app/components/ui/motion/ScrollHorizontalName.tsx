@@ -1,26 +1,88 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 export function ScrollHorizontalName() {
     const containerRef = useRef<HTMLDivElement>(null)
-    const [translateX, setTranslateX] = useState(0)
+    const trackRef = useRef<HTMLDivElement>(null)
+    const blockRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        const handleScroll = () => {
-            if (!containerRef.current) return
-            const rect = containerRef.current.getBoundingClientRect()
-            const windowHeight = window.innerHeight
+        let rafId: number | null = null
+        let blockWidth = 0
 
-            const scrollY = window.scrollY
-            const move = scrollY * 0.45
-            setTranslateX(-move)
+        const measure = () => {
+            if (blockRef.current) {
+                blockWidth = blockRef.current.offsetWidth
+            }
         }
 
-        window.addEventListener('scroll', handleScroll, { passive: true })
-        handleScroll()
-        return () => window.removeEventListener('scroll', handleScroll)
+        measure()
+
+        if (typeof document !== 'undefined' && document.fonts) {
+            document.fonts.ready.then(() => {
+                measure()
+                updatePosition()
+            })
+        }
+
+        const updatePosition = () => {
+            if (!trackRef.current || !containerRef.current) return
+
+            const rect = containerRef.current.getBoundingClientRect()
+            const triggerPoint = window.innerHeight * 0.30
+            const currentTop = rect.top
+
+            let offset = 0
+            if (currentTop < triggerPoint) {
+                const travelDistance = triggerPoint - currentTop
+                const move = travelDistance * 0.55
+                offset = blockWidth > 0 ? -(move % blockWidth) : -move
+            }
+
+            trackRef.current.style.transform = `translate3d(${offset}px, 0, 0)`
+        }
+
+        const onScroll = () => {
+            if (rafId !== null) return
+            rafId = requestAnimationFrame(() => {
+                rafId = null
+                updatePosition()
+            })
+        }
+
+        const onResize = () => {
+            measure()
+            updatePosition()
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true })
+        window.addEventListener('resize', onResize, { passive: true })
+        updatePosition()
+
+        return () => {
+            if (rafId !== null) cancelAnimationFrame(rafId)
+            window.removeEventListener('scroll', onScroll)
+            window.removeEventListener('resize', onResize)
+        }
     }, [])
+
+    const renderTextGroup = (isPrimary = false) => (
+        <div
+            ref={isPrimary ? blockRef : undefined}
+            className="shrink-0 flex items-center pr-8 sm:pr-14"
+            aria-hidden={!isPrimary}
+        >
+            <div className="inline-flex items-center text-[15vw] sm:text-[13vw] font-uncut font-black uppercase leading-[0.85] tracking-tighter text-ink select-none">
+                <span>BIKRA ABNA FILQIYAST DZAKI</span>
+                <span className="text-signal">.</span>
+                <span className="text-black/15 mx-6 sm:mx-10">//</span>
+                <span>FULLSTACK DEVELOPER</span>
+                <span className="text-signal">.</span>
+                <span className="text-black/15 mx-6 sm:mx-10">+</span>
+            </div>
+        </div>
+    )
 
     return (
         <div ref={containerRef} className="w-full overflow-hidden select-none py-6 sm:py-10 border-b border-black/10">
@@ -30,16 +92,14 @@ export function ScrollHorizontalName() {
             </div>
 
             <div
-                style={{
-                    transform: `translate3d(${translateX}px, 0, 0)`,
-                }}
-                className="whitespace-nowrap will-change-transform transition-transform duration-75 ease-out"
+                ref={trackRef}
+                style={{ transform: 'translate3d(0, 0, 0)' }}
+                className="flex whitespace-nowrap will-change-transform"
             >
-                <div className="inline-block text-[15vw] sm:text-[13vw] font-uncut font-black uppercase leading-[0.85] tracking-tighter text-ink">
-                    BIKRA ABNA FILQIYAST DZAKI<span className="text-signal">.</span>
-                    <span className="text-black/15 mx-6 sm:mx-10">//</span>
-                    FULLSTACK DEVELOPER<span className="text-signal">.</span>
-                </div>
+                {renderTextGroup(true)}
+                {renderTextGroup(false)}
+                {renderTextGroup(false)}
+                {renderTextGroup(false)}
             </div>
 
             <div className="flex items-center justify-between font-mono text-[11px] text-black/60 pt-4 mt-2 px-1 border-t border-black/5">

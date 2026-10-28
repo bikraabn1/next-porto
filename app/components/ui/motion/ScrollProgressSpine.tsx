@@ -1,17 +1,22 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export function ScrollProgressSpine() {
-    const [progress, setProgress] = useState(0)
-    const [activeChapter, setActiveChapter] = useState('01')
+    const [activeChapter, setActiveChapter] = useState('01 // INTRO')
+    const barRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
+        let rafId: number | null = null
+
         const handleScroll = () => {
             const scrollTop = window.scrollY
             const docHeight = document.documentElement.scrollHeight - window.innerHeight
-            const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0
-            setProgress(scrollPercent)
+            const scrollPercent = docHeight > 0 ? Math.min(Math.max((scrollTop / docHeight) * 100, 0), 100) : 0
+
+            if (barRef.current) {
+                barRef.current.style.height = `${scrollPercent}%`
+            }
 
             if (scrollPercent < 20) {
                 setActiveChapter('01 // INTRO')
@@ -24,9 +29,23 @@ export function ScrollProgressSpine() {
             }
         }
 
-        window.addEventListener('scroll', handleScroll, { passive: true })
+        const onScroll = () => {
+            if (rafId !== null) return
+            rafId = requestAnimationFrame(() => {
+                rafId = null
+                handleScroll()
+            })
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true })
+        window.addEventListener('resize', onScroll, { passive: true })
         handleScroll()
-        return () => window.removeEventListener('scroll', handleScroll)
+
+        return () => {
+            if (rafId !== null) cancelAnimationFrame(rafId)
+            window.removeEventListener('scroll', onScroll)
+            window.removeEventListener('resize', onScroll)
+        }
     }, [])
 
     return (
@@ -45,14 +64,13 @@ export function ScrollProgressSpine() {
 
             <div className="w-[1px] h-32 bg-black/15 relative overflow-hidden">
                 <div
-                    style={{ height: `${progress}%` }}
-                    className="w-full bg-signal transition-all duration-150 ease-out"
+                    ref={barRef}
+                    style={{ height: '0%' }}
+                    className="w-full bg-signal will-change-[height]"
                 />
             </div>
 
-            <span className="font-mono text-[9px] text-black/40 tabular-nums">
-                {Math.round(progress)}%
-            </span>
+            <span className="font-mono text-[8px] text-black/30">[ CH ]</span>
         </aside>
     )
 }
