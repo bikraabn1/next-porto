@@ -41,14 +41,12 @@ export async function getFeatureSettings(): Promise<FeatureSettings> {
 }
 
 export async function getPageSettings<T>(pageId: string): Promise<T | null> {
-    try {
-        const res = await fetch(`${CMS_URL}/api/pages/${pageId}`, {
-            next: { revalidate: 60 },
-        })
-        if (!res.ok) return null
-        return (await res.json()) as T
-    } catch {
-        // shortcut: fallback to null if offline, consumers supply hardcoded defaults
-        return null
+    const res = await fetch(`${CMS_URL}/api/pages/${pageId}`, {
+        next: { revalidate: 60 },
+    })
+    if (!res.ok) {
+        if (res.status === 404) return null
+        throw new Error(`[CMS_ERROR] Failed to fetch settings for '${pageId}': HTTP ${res.status}`)
     }
+    return (await res.json()) as T
 }

@@ -31,7 +31,7 @@ const LandingPage = ({
     experiences,
     capabilities,
 }: LandingPageProps = {}) => {
-    const projects = initialProjects && initialProjects.length > 0 ? initialProjects : PROJECT_DATAS
+    const projects = initialProjects || []
     const headline = pageSettings?.headline || "Fullstack Developer crafting high-grade web applications, reactive architectures, and real-time interfaces"
     const availabilityStatus = pageSettings?.availabilityStatus || "OPEN FOR ENGAGEMENTS"
     const bio = pageSettings?.bio || "Currently operating as Fullstack Developer Intern at PT Tiga Serangkai Pustaka Mandiri — previously engineered production AI summaries and responsive systems at PT Adma Digital Solusi and real-time chatbots for PLN at PT Wiratek Solusi Asia."
@@ -44,7 +44,7 @@ const LandingPage = ({
         .filter((p) => !featureProjects.some((fp) => fp.title === p.title))
         .slice(0, 4)
 
-    const timelineList = (experiences && experiences.length > 0 ? experiences : EXPERIENCE_DATAS).slice(0, 3)
+    const timelineList = (experiences || []).slice(0, 3)
 
     const sectionOrder = pageSettings?.sectionOrder && pageSettings.sectionOrder.length > 0
         ? pageSettings.sectionOrder

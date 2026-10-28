@@ -74,16 +74,16 @@ export type ExperienceItem = (typeof EXPERIENCE_DATAS)[number]
 const CMS_URL = process.env.CMS_URL || process.env.NEXT_PUBLIC_CMS_URL || "http://localhost:5173"
 
 export async function getExperiences(): Promise<typeof EXPERIENCE_DATAS> {
-    try {
-        const res = await fetch(`${CMS_URL}/api/experiences`, {
-            next: { revalidate: 60 },
-        })
-        if (!res.ok) throw new Error(`CMS status ${res.status}`)
-        const data = await res.json()
-        return Array.isArray(data) && data.length > 0 ? data : EXPERIENCE_DATAS
-    } catch {
-        // shortcut: offline fallback during development or CMS outage
-        return EXPERIENCE_DATAS
+    const res = await fetch(`${CMS_URL}/api/experiences`, {
+        next: { revalidate: 60 },
+    })
+    if (!res.ok) {
+        throw new Error(`[CMS_ERROR] Failed to fetch experiences: HTTP ${res.status}`)
     }
+    const data = await res.json()
+    if (!Array.isArray(data)) {
+        throw new Error(`[CMS_ERROR] Invalid experiences payload returned by CMS`)
+    }
+    return data
 }
 

@@ -81,18 +81,20 @@ export const POST = async (req: Request) => {
     try {
         const CMS_URL = process.env.CMS_URL || process.env.NEXT_PUBLIC_CMS_URL || "http://localhost:5173"
 
-        try {
-            const featRes = await fetch(`${CMS_URL}/api/pages/features`, { next: { revalidate: 60 } })
-            if (featRes.ok) {
-                const featData = await featRes.json()
-                if (featData?.enableJacksonBot === false) {
-                    return new Response(JSON.stringify({ error: 'Not found' }), {
-                        status: 404,
-                        headers: { 'Content-Type': 'application/json' },
-                    })
-                }
-            }
-        } catch {}
+        const featRes = await fetch(`${CMS_URL}/api/pages/features`, { next: { revalidate: 60 } })
+        if (!featRes.ok) {
+            return new Response(JSON.stringify({ error: 'Upstream CMS service unavailable' }), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' },
+            })
+        }
+        const featData = await featRes.json()
+        if (featData?.enableJacksonBot === false) {
+            return new Response(JSON.stringify({ error: 'Not found' }), {
+                status: 404,
+                headers: { 'Content-Type': 'application/json' },
+            })
+        }
 
         const { messages } = await req.json()
 

@@ -70,7 +70,7 @@ export function ScrollHorizontalName() {
     const renderTextGroup = (isPrimary = false) => (
         <div
             ref={isPrimary ? blockRef : undefined}
-            className="shrink-0 flex items-center pr-8 sm:pr-14"
+            className="shrink-0 flex items-center pl-2 sm:pl-4 pr-8 sm:pr-14"
             aria-hidden={!isPrimary}
         >
             <div className="inline-flex items-center text-[15vw] sm:text-[13vw] font-uncut font-black uppercase leading-[0.85] tracking-tighter text-ink select-none">

@@ -24,7 +24,7 @@ const Navigation = ({ features }: NavigationProps) => {
     ]
 
     return (
-        <header className="sticky top-0 z-50 w-full bg-background/90 backdrop-blur-md border-b border-black/5 flex items-center justify-between px-6 sm:px-12 py-4 font-mono text-[11px] select-none transition-all">
+        <header className="sticky top-0 z-50 w-full bg-background/90 backdrop-blur-md border-b border-black/5 flex items-center justify-between px-6 sm:px-12 py-4 font-mono text-[11px] select-none">
             <Link
                 href="/"
                 className="flex items-center gap-2.5 font-uncut font-bold text-base tracking-tight text-black group"

@@ -11,15 +11,15 @@ export const CERTIFICATION_DATAS: Certification[] = [
 const CMS_URL = process.env.CMS_URL || process.env.NEXT_PUBLIC_CMS_URL || "http://localhost:5173"
 
 export async function getCertifications(): Promise<Certification[]> {
-    try {
-        const res = await fetch(`${CMS_URL}/api/certifications`, {
-            next: { revalidate: 60 },
-        })
-        if (!res.ok) throw new Error(`CMS status ${res.status}`)
-        const data = await res.json()
-        return Array.isArray(data) && data.length > 0 ? data : CERTIFICATION_DATAS
-    } catch {
-        // shortcut: offline fallback during development or CMS outage
-        return CERTIFICATION_DATAS
+    const res = await fetch(`${CMS_URL}/api/certifications`, {
+        next: { revalidate: 60 },
+    })
+    if (!res.ok) {
+        throw new Error(`[CMS_ERROR] Failed to fetch certifications: HTTP ${res.status}`)
     }
+    const data = await res.json()
+    if (!Array.isArray(data)) {
+        throw new Error(`[CMS_ERROR] Invalid certifications payload returned by CMS`)
+    }
+    return data
 }
