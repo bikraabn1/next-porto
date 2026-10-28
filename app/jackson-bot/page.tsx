@@ -1,7 +1,14 @@
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import ChatWrapper from '../components/ui/jackson-bot/ChatWrapper'
+import { getFeatureSettings } from '../public/datas/pages'
 
-export default function JacksonBotPage() {
+export default async function JacksonBotPage() {
+    const features = await getFeatureSettings()
+    if (!features.enableJacksonBot) {
+        notFound()
+    }
+
     return (
         <main className='w-full min-h-screen bg-background text-foreground'>
             <div className='px-6 sm:px-12 pt-20 pb-12 max-w-5xl mx-auto border-b border-black/10'>

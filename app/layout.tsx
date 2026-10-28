@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "./components/ui/navigation/Navigation";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { getFeatureSettings } from "./public/datas/pages";
 
 const martianMono = Martian_Mono({
   variable: "--font-martian-mono",
@@ -70,17 +71,19 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const features = await getFeatureSettings();
+
   return (
     <html lang="en">
       <body
         className={`${uncutSans.variable} ${martianMono.variable} antialiased selection:bg-signal selection:text-white`}
       >
-        <Navbar />
+        <Navbar features={features} />
         {children}
         <SpeedInsights />
       </body>

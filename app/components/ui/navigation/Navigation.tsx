@@ -5,14 +5,22 @@ import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { JakartaClock } from "../motion/JakartaClock"
 
-const Navigation = () => {
+interface NavigationProps {
+    features?: {
+        enableJacksonBot?: boolean
+        enableProjectsPage?: boolean
+        enableExperiencePage?: boolean
+    }
+}
+
+const Navigation = ({ features }: NavigationProps) => {
     const pathname = usePathname()
 
     const menus = [
         { label: 'Index', href: '/' },
-        { label: 'Projects', href: '/projects' },
-        { label: 'Timeline', href: '/experience' },
-        { label: 'Terminal', href: '/jackson-bot' }
+        ...(features?.enableProjectsPage !== false ? [{ label: 'Projects', href: '/projects' }] : []),
+        ...(features?.enableExperiencePage !== false ? [{ label: 'Timeline', href: '/experience' }] : []),
+        ...(features?.enableJacksonBot !== false ? [{ label: 'Terminal', href: '/jackson-bot' }] : []),
     ]
 
     return (

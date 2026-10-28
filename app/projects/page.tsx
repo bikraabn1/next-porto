@@ -1,10 +1,19 @@
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import { FaArrowUpRightFromSquare } from 'react-icons/fa6'
 import { getProjects } from '../public/datas/projects'
+import { getFeatureSettings } from '../public/datas/pages'
 import Image from 'next/image'
 
 export default async function ProjectsPage() {
-    const projects = await getProjects()
+    const [projects, features] = await Promise.all([
+        getProjects(),
+        getFeatureSettings(),
+    ])
+
+    if (!features.enableProjectsPage) {
+        notFound()
+    }
 
     return (
         <main className='w-full min-h-screen bg-background text-foreground'>

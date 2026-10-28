@@ -1,13 +1,20 @@
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import { getExperiences } from '../public/datas/experiences'
 import { getCertifications } from '../public/datas/certification'
+import { getFeatureSettings } from '../public/datas/pages'
 import { FaArrowUpRightFromSquare } from 'react-icons/fa6'
 
 export default async function ExperiencePage() {
-    const [experiences, certifications] = await Promise.all([
+    const [experiences, certifications, features] = await Promise.all([
         getExperiences(),
         getCertifications(),
+        getFeatureSettings(),
     ])
+
+    if (!features.enableExperiencePage) {
+        notFound()
+    }
 
     return (
         <main className='w-full min-h-screen bg-background text-foreground'>

@@ -25,6 +25,21 @@ export interface JacksonBotSettings {
     systemPrompt?: string
 }
 
+export interface FeatureSettings {
+    enableJacksonBot?: boolean
+    enableProjectsPage?: boolean
+    enableExperiencePage?: boolean
+}
+
+export async function getFeatureSettings(): Promise<FeatureSettings> {
+    const settings = await getPageSettings<FeatureSettings>("features")
+    return {
+        enableJacksonBot: settings?.enableJacksonBot !== false,
+        enableProjectsPage: settings?.enableProjectsPage !== false,
+        enableExperiencePage: settings?.enableExperiencePage !== false,
+    }
+}
+
 export async function getPageSettings<T>(pageId: string): Promise<T | null> {
     try {
         const res = await fetch(`${CMS_URL}/api/pages/${pageId}`, {

@@ -79,6 +79,21 @@ Team Work, Time Management
 
 export const POST = async (req: Request) => {
     try {
+        const CMS_URL = process.env.CMS_URL || process.env.NEXT_PUBLIC_CMS_URL || "http://localhost:5173"
+
+        try {
+            const featRes = await fetch(`${CMS_URL}/api/pages/features`, { next: { revalidate: 60 } })
+            if (featRes.ok) {
+                const featData = await featRes.json()
+                if (featData?.enableJacksonBot === false) {
+                    return new Response(JSON.stringify({ error: 'Not found' }), {
+                        status: 404,
+                        headers: { 'Content-Type': 'application/json' },
+                    })
+                }
+            }
+        } catch {}
+
         const { messages } = await req.json()
 
         if (!messages || !Array.isArray(messages)) {
@@ -92,7 +107,6 @@ export const POST = async (req: Request) => {
 
         let dynamicSystemPrompt = SYSTEM_PROMPT
         try {
-            const CMS_URL = process.env.CMS_URL || process.env.NEXT_PUBLIC_CMS_URL || "http://localhost:5173"
             const cmsRes = await fetch(`${CMS_URL}/api/pages/jackson_bot`, {
                 next: { revalidate: 60 },
             })
